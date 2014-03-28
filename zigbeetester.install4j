@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install4j version="4.2.2" transformSequenceNumber="2">
   <directoryPresets config="F:/ICONS/clpico" />
-  <application name="zigbee协议解析工具V15" distributionSourceDir="" applicationId="7950-8044-9101-8763" mediaDir="D:/Workspaces/instrument_framework/store" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" keepModificationTimes="false" missingFilesStrategy="warn" shortName="InstrumentTester" publisher="刘轩" publisherWeb="www.liuxuan.net" version="2.0.15" allPathsRelative="false" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" installerName="" javaMinVersion="1.6" javaMaxVersion="" allowBetaVM="true" jdkMode="runtimeJre" jdkName="">
+  <application name="zigbee协议解析工具" distributionSourceDir="" applicationId="7950-8044-9101-8763" mediaDir="D:/Workspaces/instrument_framework/store" mediaFilePattern="${compiler:sys.shortName}_${compiler:sys.platform}_${compiler:sys.version}" compression="6" lzmaCompression="false" pack200Compression="false" excludeSignedFromPacking="true" keepModificationTimes="false" missingFilesStrategy="warn" shortName="InstrumentTester" publisher="刘轩" publisherWeb="www.liuxuan.net" version="2.0.19" allPathsRelative="false" backupOnSave="false" autoSave="false" convertDotsToUnderscores="true" macSignature="????" installerName="" javaMinVersion="1.6" javaMaxVersion="" allowBetaVM="true" jdkMode="runtimeJre" jdkName="">
     <languages skipLanguageSelection="false" languageSelectionInPrincipalLanguage="false">
       <principalLanguage id="zh_CN" customLocalizationFile="" />
       <additionalLanguages />

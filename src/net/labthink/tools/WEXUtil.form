@@ -256,7 +256,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel_CommSetting" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanel_common" min="-2" max="-2" attributes="0"/>
+                      <Component id="jPanel_common" min="-2" pref="146" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -285,10 +285,10 @@
                               </Group>
                               <Component id="jLabel_version" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel_ParitySet" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel_BaudRateSet" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel_ParitySet" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel_BaudRateSet" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -310,8 +310,6 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jButton_TestConnection" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel_version" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                              <Component id="jLabel_BaudRateSet" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jComboBox_BaudRateSet" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -322,9 +320,18 @@
                       </Group>
                       <Group type="102" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jComboBox_ParitySet" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel_ParitySet" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel_BaudRateSet" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jComboBox_BaudRateSet" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jComboBox_ParitySet" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel_ParitySet" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
@@ -427,7 +434,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel_Channel" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -438,121 +445,96 @@
                                       <Component id="jComboBox_Power" min="-2" pref="110" max="-2" attributes="0"/>
                                       <Component id="jComboBox_Channel" min="-2" pref="110" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="0" pref="13" max="32767" attributes="0"/>
-                                          <Component id="jLabel_EnableIO" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jComboBox_EnableIO" min="-2" pref="110" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="jButton_common_read" min="-2" pref="63" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jButton_common_write" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <Component id="jLabel_Bootloader" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jComboBox_Bootloader" min="-2" pref="110" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="jLabel_Topology" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                      <Component id="jComboBox_Topology" min="-2" pref="110" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="jLabel_NodeType" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="jComboBox_NodeType" min="-2" pref="110" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                          </Group>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jLabel_NetId" min="-2" max="-2" attributes="0"/>
                               </Group>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jFormattedTextField_NetId" alignment="1" min="-2" pref="114" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel_NodeId" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jFormattedTextField_NodeId" min="-2" pref="114" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="jFormattedTextField_NetId" alignment="1" min="-2" pref="114" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabel_NodeId" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="jFormattedTextField_NodeId" min="-2" pref="114" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="15" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel_Topology" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel_NodeType" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel_Bootloader" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel_EnableIO" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="jComboBox_EnableIO" min="-2" pref="110" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
+                                  <Component id="jButton_common_write" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jComboBox_Bootloader" alignment="1" min="-2" pref="110" max="-2" attributes="0"/>
+                                      <Component id="jComboBox_Topology" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
+                                      <Component id="jComboBox_NodeType" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="jButton_common_read" min="-2" pref="63" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jComboBox_Channel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel_Channel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel_Topology" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jComboBox_Topology" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jComboBox_Power" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel_Power" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel_NodeType" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jComboBox_NodeType" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="jButton_common_write" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jComboBox_Channel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel_Channel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jComboBox_Power" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel_Power" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel_NetId" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jFormattedTextField_NetId" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jComboBox_Topology" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel_Topology" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jLabel_NodeType" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jComboBox_NodeType" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel_Bootloader" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jComboBox_Bootloader" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButton_common_read" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jButton_common_write" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jButton_common_read" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel_EnableIO" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jComboBox_EnableIO" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jLabel_NetId" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jFormattedTextField_NetId" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="3" groupAlignment="3" attributes="0">
-                                          <Component id="jLabel_Bootloader" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jComboBox_Bootloader" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jLabel_NodeId" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jFormattedTextField_NodeId" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="3" groupAlignment="3" attributes="0">
-                                          <Component id="jLabel_EnableIO" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jComboBox_EnableIO" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <EmptySpace pref="20" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel_NodeId" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jFormattedTextField_NodeId" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -762,8 +744,8 @@
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jButton_TestRouteRSSI" pref="117" max="32767" attributes="0"/>
-                                          <Component id="jButton_ExitTransMode" max="32767" attributes="0"/>
+                                          <Component id="jButton_TestRouteRSSI" min="-2" pref="117" max="-2" attributes="0"/>
+                                          <Component id="jButton_ExitTransMode" min="-2" pref="117" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Component id="jTextField_SendText" max="32767" attributes="0"/>

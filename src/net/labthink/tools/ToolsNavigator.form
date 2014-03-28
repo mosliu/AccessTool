@@ -29,7 +29,7 @@
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="17" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -61,10 +61,10 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jButton_Fallingdart" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton_Infrared" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton_ZigbeeSet" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jButton_Fallingdart" max="32767" attributes="0"/>
+                      <Component id="jButton_Infrared" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jButton_ZigbeeSet" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -128,8 +128,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jButton_random" min="-2" max="-2" attributes="0"/>
                       <Component id="jButton_checksum" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButton_UnitConvert" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="20" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -141,6 +142,8 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButton_checksum" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jButton_UnitConvert" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -160,6 +163,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_checksumActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton_UnitConvert">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#x5355;&#x4f4d;&#x8f6c;&#x6362;&#x5de5;&#x5177;"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_UnitConvertActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

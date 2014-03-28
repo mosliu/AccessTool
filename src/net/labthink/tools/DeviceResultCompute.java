@@ -4,11 +4,18 @@
  */
 package net.labthink.tools;
 
+import java.awt.ItemSelectable;
+import java.awt.event.ItemEvent;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.JFormattedTextField;
+import javax.swing.ListCellRenderer;
+import net.labthink.tools.unitconvert.Unit;
+import net.labthink.tools.unitconvert.UnitCellRenderer;
+import net.labthink.tools.unitconvert.UnitCombleBoxModel;
+import net.labthink.tools.unitconvert.UnitConverterFactory;
 
 /**
  *
@@ -32,6 +39,7 @@ public class DeviceResultCompute extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup_vac = new javax.swing.ButtonGroup();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea_output = new javax.swing.JTextArea();
@@ -123,6 +131,20 @@ public class DeviceResultCompute extends javax.swing.JFrame {
         jFormattedTextField_VAC_kuosanT2 = new javax.swing.JFormattedTextField();
         jLabel_VAC_kuosanT2 = new javax.swing.JLabel();
         jButton_VAC_compute = new javax.swing.JButton();
+        jRadioButton_vac_7210 = new javax.swing.JRadioButton();
+        jRadioButton_vac_7110 = new javax.swing.JRadioButton();
+        jRadioButton_vac_7200 = new javax.swing.JRadioButton();
+        jRadioButton_vac_7100 = new javax.swing.JRadioButton();
+        jPanel_vac_other = new javax.swing.JPanel();
+        jLabel_vac_FilmCalibration = new javax.swing.JLabel();
+        jFormattedTextField_VAC_filmcali = new javax.swing.JFormattedTextField();
+        jPanel_Math = new javax.swing.JPanel();
+        jScrollPane_math = new javax.swing.JScrollPane();
+        jTextArea_Input_math = new javax.swing.JTextArea();
+        jLabel_math = new javax.swing.JLabel();
+        jButton_math = new javax.swing.JButton();
+        jLabel_math_precision = new javax.swing.JLabel();
+        jFormattedTextField_math_precision = new javax.swing.JFormattedTextField();
         jPanel_about = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -138,6 +160,7 @@ public class DeviceResultCompute extends javax.swing.JFrame {
         jTextArea_Input_FD.setColumns(20);
         jTextArea_Input_FD.setRows(5);
         jTextArea_Input_FD.setText("230\n213\n200\n230\n215\n200\n185\n170\n230\n260");
+        jTextArea_Input_FD.setToolTipText("输入的数据，如果有重复的，可以用“数，个数”的形式表示，例如有13个1，可以写为“13，1”");
         jScrollPane1.setViewportView(jTextArea_Input_FD);
 
         jLabel2.setText("输入所有冲破质量：");
@@ -205,7 +228,7 @@ public class DeviceResultCompute extends javax.swing.JFrame {
                 .addComponent(jButton_Compute_FD)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel_fallingdartLayout = new javax.swing.GroupLayout(jPanel_fallingdart);
@@ -219,7 +242,7 @@ public class DeviceResultCompute extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         jPanel_fallingdartLayout.setVerticalGroup(
             jPanel_fallingdartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -343,7 +366,8 @@ public class DeviceResultCompute extends javax.swing.JFrame {
         jLabel_RGT_K.setToolTipText("S---------为计量管的截面积，单位为cm2");
 
         jFormattedTextField_RGT_K.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00000"))));
-        jFormattedTextField_RGT_K.setToolTipText("S---------为计量管的截面积，单位为cm2");
+        jFormattedTextField_RGT_K.setText("0.20948");
+        jFormattedTextField_RGT_K.setToolTipText("");
         jFormattedTextField_RGT_K.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jFormattedTextField_RGT_KFocusGained(evt);
@@ -395,7 +419,7 @@ public class DeviceResultCompute extends javax.swing.JFrame {
                             .addComponent(jFormattedTextField_RGT_P2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(39, 39, 39)
                 .addComponent(jButton_RGT_compute)
-                .addContainerGap(304, Short.MAX_VALUE))
+                .addContainerGap(246, Short.MAX_VALUE))
         );
         jPanel_rgtLayout.setVerticalGroup(
             jPanel_rgtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -437,7 +461,7 @@ public class DeviceResultCompute extends javax.swing.JFrame {
                 .addGroup(jPanel_rgtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_RGT_K)
                     .addComponent(jFormattedTextField_RGT_K, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
 
         jTabbedPane_about.addTab("残氧", jPanel_rgt);
@@ -475,7 +499,7 @@ public class DeviceResultCompute extends javax.swing.JFrame {
                         .addComponent(jLabel_sly_a, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jFormattedTextField_sly_a, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(10, 10, Short.MAX_VALUE))
             .addGroup(jPanel_sly_variableLayout.createSequentialGroup()
                 .addComponent(jLabel_sly_n, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -588,7 +612,7 @@ public class DeviceResultCompute extends javax.swing.JFrame {
                 .addGroup(jPanel_slyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel_sly_const, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel_sly_variable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
                 .addGroup(jPanel_slyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_sly_compute)
                     .addComponent(jLabel_sly_result, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -599,7 +623,7 @@ public class DeviceResultCompute extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("渗透系数"));
 
-        jFormattedTextField_VAC_d.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        jFormattedTextField_VAC_d.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         jFormattedTextField_VAC_d.setText("125");
         jFormattedTextField_VAC_d.setToolTipText("试样厚度");
         jFormattedTextField_VAC_d.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -632,8 +656,8 @@ public class DeviceResultCompute extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("常规参数"));
 
-        jFormattedTextField_VAC_V.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.000"))));
-        jFormattedTextField_VAC_V.setText("8.010");
+        jFormattedTextField_VAC_V.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0000"))));
+        jFormattedTextField_VAC_V.setText("8.01");
         jFormattedTextField_VAC_V.setToolTipText("下腔体积");
         jFormattedTextField_VAC_V.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -681,7 +705,7 @@ public class DeviceResultCompute extends javax.swing.JFrame {
         });
 
         jFormattedTextField_VAC_P1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.000"))));
-        jFormattedTextField_VAC_P1.setText("101.325");
+        jFormattedTextField_VAC_P1.setText("1");
         jFormattedTextField_VAC_P1.setToolTipText("高压腔压力");
         jFormattedTextField_VAC_P1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -689,7 +713,7 @@ public class DeviceResultCompute extends javax.swing.JFrame {
             }
         });
 
-        jLabel_VAC_P1.setText("P1(kPa)：");
+        jLabel_VAC_P1.setText("P1(0.1MPa)：");
         jLabel_VAC_P1.setToolTipText("高压腔压力");
 
         jFormattedTextField_VAC_P2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.000"))));
@@ -701,7 +725,7 @@ public class DeviceResultCompute extends javax.swing.JFrame {
             }
         });
 
-        jLabel_VAC_P2.setText("P2(kPa)：");
+        jLabel_VAC_P2.setText("P2(0.1MPa)：");
         jLabel_VAC_P2.setToolTipText("低压腔压力");
 
         jLabel_VAC_deltaT.setText("Δt(s)：");
@@ -799,7 +823,7 @@ public class DeviceResultCompute extends javax.swing.JFrame {
                             .addComponent(jFormattedTextField_VAC_deltaPstart, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jFormattedTextField_VAC_deltaPend, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jFormattedTextField_VAC_n, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -852,7 +876,7 @@ public class DeviceResultCompute extends javax.swing.JFrame {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("扩散系数"));
 
-        jFormattedTextField_VAC_kuosanP1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        jFormattedTextField_VAC_kuosanP1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         jFormattedTextField_VAC_kuosanP1.setText("150");
         jFormattedTextField_VAC_kuosanP1.setToolTipText("最终压力");
         jFormattedTextField_VAC_kuosanP1.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -867,7 +891,7 @@ public class DeviceResultCompute extends javax.swing.JFrame {
         jLabel_VAC_kuosanP2.setText("p2(Pa)：");
         jLabel_VAC_kuosanP2.setToolTipText("距离最后两个测试间隔压力");
 
-        jFormattedTextField_VAC_kuosanP2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        jFormattedTextField_VAC_kuosanP2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         jFormattedTextField_VAC_kuosanP2.setText("100");
         jFormattedTextField_VAC_kuosanP2.setToolTipText("距离最后两个测试间隔压力");
         jFormattedTextField_VAC_kuosanP2.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -879,7 +903,7 @@ public class DeviceResultCompute extends javax.swing.JFrame {
         jLabel_VAC_kuosanT1.setText("t1(s)：");
         jLabel_VAC_kuosanT1.setToolTipText("最终时间");
 
-        jFormattedTextField_VAC_kuosanT1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        jFormattedTextField_VAC_kuosanT1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         jFormattedTextField_VAC_kuosanT1.setText("7200");
         jFormattedTextField_VAC_kuosanT1.setToolTipText("S---------为计量管的截面积，单位为cm2");
         jFormattedTextField_VAC_kuosanT1.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -888,7 +912,7 @@ public class DeviceResultCompute extends javax.swing.JFrame {
             }
         });
 
-        jFormattedTextField_VAC_kuosanT2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.0"))));
+        jFormattedTextField_VAC_kuosanT2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         jFormattedTextField_VAC_kuosanT2.setText("0");
         jFormattedTextField_VAC_kuosanT2.setToolTipText("S---------为计量管的截面积，单位为cm2");
         jFormattedTextField_VAC_kuosanT2.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -952,6 +976,69 @@ public class DeviceResultCompute extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup_vac.add(jRadioButton_vac_7210);
+        jRadioButton_vac_7210.setText("7210");
+        jRadioButton_vac_7210.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton_vac_7210ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup_vac.add(jRadioButton_vac_7110);
+        jRadioButton_vac_7110.setText("7110");
+        jRadioButton_vac_7110.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton_vac_7110ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup_vac.add(jRadioButton_vac_7200);
+        jRadioButton_vac_7200.setText("7200");
+        jRadioButton_vac_7200.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton_vac_7200ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup_vac.add(jRadioButton_vac_7100);
+        jRadioButton_vac_7100.setText("7100");
+        jRadioButton_vac_7100.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton_vac_7100ActionPerformed(evt);
+            }
+        });
+
+        jPanel_vac_other.setBorder(javax.swing.BorderFactory.createTitledBorder("其他"));
+
+        jLabel_vac_FilmCalibration.setText("膜标定系数：");
+
+        jFormattedTextField_VAC_filmcali.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat(""))));
+        jFormattedTextField_VAC_filmcali.setText("1");
+        jFormattedTextField_VAC_filmcali.setToolTipText("最终压力");
+        jFormattedTextField_VAC_filmcali.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jFormattedTextField_VAC_filmcaliFocusGained(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel_vac_otherLayout = new javax.swing.GroupLayout(jPanel_vac_other);
+        jPanel_vac_other.setLayout(jPanel_vac_otherLayout);
+        jPanel_vac_otherLayout.setHorizontalGroup(
+            jPanel_vac_otherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_vac_otherLayout.createSequentialGroup()
+                .addComponent(jLabel_vac_FilmCalibration)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jFormattedTextField_VAC_filmcali))
+        );
+        jPanel_vac_otherLayout.setVerticalGroup(
+            jPanel_vac_otherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_vac_otherLayout.createSequentialGroup()
+                .addGroup(jPanel_vac_otherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_vac_FilmCalibration)
+                    .addComponent(jFormattedTextField_VAC_filmcali, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 16, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel_vacLayout = new javax.swing.GroupLayout(jPanel_vac);
         jPanel_vac.setLayout(jPanel_vacLayout);
         jPanel_vacLayout.setHorizontalGroup(
@@ -960,30 +1047,107 @@ public class DeviceResultCompute extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel_vacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_vacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jButton_VAC_compute))
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addGroup(jPanel_vacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel_vacLayout.createSequentialGroup()
+                        .addComponent(jRadioButton_vac_7210)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioButton_vac_7200))
+                    .addComponent(jButton_VAC_compute)
+                    .addGroup(jPanel_vacLayout.createSequentialGroup()
+                        .addComponent(jRadioButton_vac_7110)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadioButton_vac_7100))
+                    .addComponent(jPanel_vac_other, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         jPanel_vacLayout.setVerticalGroup(
             jPanel_vacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_vacLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel_vacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel_vacLayout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(89, 89, 89)
-                        .addComponent(jButton_VAC_compute)
-                        .addGap(0, 12, Short.MAX_VALUE)))
+                        .addGroup(jPanel_vacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioButton_vac_7210)
+                            .addComponent(jRadioButton_vac_7200))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel_vacLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioButton_vac_7110)
+                            .addComponent(jRadioButton_vac_7100))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                        .addComponent(jPanel_vac_other, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton_VAC_compute))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         jTabbedPane_about.addTab("压差", jPanel_vac);
+
+        jPanel_Math.setToolTipText("输入的数据，如果有重复的，可以用“数，个数”的形式表示，例如有13个1，可以写为“13，1”");
+
+        jTextArea_Input_math.setColumns(20);
+        jTextArea_Input_math.setRows(5);
+        jTextArea_Input_math.setText("230\n213\n200\n");
+        jTextArea_Input_math.setToolTipText("输入的数据，如果有重复的，可以用“数，个数”的形式表示，例如有13个1，可以写为“13，1”");
+        jScrollPane_math.setViewportView(jTextArea_Input_math);
+
+        jLabel_math.setText("输入数据：");
+
+        jButton_math.setText("计算");
+        jButton_math.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_mathActionPerformed(evt);
+            }
+        });
+
+        jLabel_math_precision.setText("小数点位数：");
+
+        jFormattedTextField_math_precision.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        jFormattedTextField_math_precision.setText("5");
+
+        javax.swing.GroupLayout jPanel_MathLayout = new javax.swing.GroupLayout(jPanel_Math);
+        jPanel_Math.setLayout(jPanel_MathLayout);
+        jPanel_MathLayout.setHorizontalGroup(
+            jPanel_MathLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_MathLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel_MathLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel_math)
+                    .addGroup(jPanel_MathLayout.createSequentialGroup()
+                        .addComponent(jScrollPane_math, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel_MathLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton_math, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel_MathLayout.createSequentialGroup()
+                                .addComponent(jLabel_math_precision)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jFormattedTextField_math_precision, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(178, Short.MAX_VALUE))
+        );
+        jPanel_MathLayout.setVerticalGroup(
+            jPanel_MathLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_MathLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel_math)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel_MathLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane_math, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+                    .addGroup(jPanel_MathLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel_MathLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel_math_precision)
+                            .addComponent(jFormattedTextField_math_precision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton_math)))
+                .addContainerGap())
+        );
+
+        jTabbedPane_about.addTab("数据方差计算", jPanel_Math);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("修改记录"));
 
@@ -992,7 +1156,7 @@ public class DeviceResultCompute extends javax.swing.JFrame {
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.setText("2013.11.18 更新撕裂计算公式\n2013.11.18 更新残氧工时，增加了去除零点高度\n2013.11.13 完成撕裂初稿\n2013.11.08 增加残氧的文本框选中则全选功能\n2013.11.07 落镖按照需求进行修改，需求为可输入一个数据的个数\n2013.11.07 完成残氧初稿\n2013.11.06 完成落镖计算\n2014.02.24 完成压差法计算\n\n");
+        jTextArea1.setText("2013.11.18 更新撕裂计算公式\n2013.11.18 更新残氧工时，增加了去除零点高度\n2013.11.13 完成撕裂初稿\n2013.11.08 增加残氧的文本框选中则全选功能\n2013.11.07 落镖按照需求进行修改，需求为可输入一个数据的个数\n2013.11.07 完成残氧初稿\n2013.11.06 完成落镖计算\n2014.02.24 完成压差法计算\n2014.02.26 完成方差、标准差计算\n2014.02.27 修正方差计算时对小数处理错误的情况\n2014.02.28 添加残氧K值默认值。\n2014.03.19 添加压差法4款设备的默认值\n");
         jTextArea1.setEnabled(false);
         jScrollPane3.setViewportView(jTextArea1);
 
@@ -1002,13 +1166,13 @@ public class DeviceResultCompute extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1050,7 +1214,7 @@ public class DeviceResultCompute extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1072,7 +1236,7 @@ public class DeviceResultCompute extends javax.swing.JFrame {
 
         for (int i = 0; i < choicelist.size(); i++) {
             String tmpstr = choicelist.get(i);
-            tmpstr = tmpstr.replaceAll("[^0-9,，]", "").trim();
+            tmpstr = tmpstr.replaceAll("[^0-9,，\\.]", "").trim();
 //            sb.append("从（").append(choicelist.get(i)).append("）替换为（").append(tmpstr).append("）\r\n");
             int count = 0;
             if (tmpstr.contains(",") || tmpstr.contains("，")) {
@@ -1314,53 +1478,241 @@ public class DeviceResultCompute extends javax.swing.JFrame {
         double V = getDoubleFromjFormattedTextField(jFormattedTextField_VAC_V);
         double S = getDoubleFromjFormattedTextField(jFormattedTextField_VAC_S);
         double T = getDoubleFromjFormattedTextField(jFormattedTextField_VAC_T);
-        T+= 273.15;
+        T += 273.15;
         double T0 = getDoubleFromjFormattedTextField(jFormattedTextField_VAC_T0);
         double P0 = getDoubleFromjFormattedTextField(jFormattedTextField_VAC_P0);
         double P1 = getDoubleFromjFormattedTextField(jFormattedTextField_VAC_P1);
-        P1 = P1 /1000;
+        
         double P2 = getDoubleFromjFormattedTextField(jFormattedTextField_VAC_P2);
-        P2 = P2 /1000;
+        
         double deltaT = getDoubleFromjFormattedTextField(jFormattedTextField_VAC_deltaT);
         double deltaPstart = getDoubleFromjFormattedTextField(jFormattedTextField_VAC_deltaPstart);
         double deltaPend = getDoubleFromjFormattedTextField(jFormattedTextField_VAC_deltaPend);
         double n = getDoubleFromjFormattedTextField(jFormattedTextField_VAC_n);
         double d = getDoubleFromjFormattedTextField(jFormattedTextField_VAC_d);
-       d = d/10000;
+        d = d / 10000;
         double kuosanp1 = getDoubleFromjFormattedTextField(jFormattedTextField_VAC_kuosanP1);
         double kuosanp2 = getDoubleFromjFormattedTextField(jFormattedTextField_VAC_kuosanP2);
         double kuosant1 = getDoubleFromjFormattedTextField(jFormattedTextField_VAC_kuosanT1);
         double kuosant2 = getDoubleFromjFormattedTextField(jFormattedTextField_VAC_kuosanT2);
+        double filmcali = getDoubleFromjFormattedTextField(jFormattedTextField_VAC_filmcali);
         
-        
+
         double deltaP = deltaPend - deltaPstart;
-        double O2_GTR = (V*3600/n/S)*(T0/P0/T)*(24/(P1-P2))*(deltaP/deltaT);
         
-        double O2_Pg = O2_GTR/24*d;//渗透系数
+        //O2GTR=（ΔP/Δt）•［V(/nS）］•［T0 / (P0T)］•［24 / (P1- P2)］
         
-        
-        double theta = (kuosant1 - kuosanp1*((kuosant1 - kuosant2)/(kuosanp1-kuosanp2)))/3600; //θ
-        double O2_D = d*d/(6*theta);//扩散系数
-        
-        double O2_S = O2_Pg/O2_D;//溶解度系数
-        
+        double O2_GTR = (deltaP / (deltaT/3600)) * (V  / (n * S)) * (T0 / P0 / T) * (24 / (P1 - P2))*filmcali ;
+
+        double O2_Pg = O2_GTR / 24 * d;//渗透系数
+
+
+        double theta = (kuosant1 - kuosanp1 * ((kuosant1 - kuosant2) / (kuosanp1 - kuosanp2))) / 3600; //θ
+        double O2_D = d * d / (6 * theta);//扩散系数
+
+        double O2_S = O2_Pg / O2_D;//溶解度系数
+
         jTextArea_output.append(null);
-        jTextArea_output.setText("透气量O2_GTR结果为：" + O2_GTR+"  cm3/m2·h·0.1MPa");
-        
-        
-        jTextArea_output.append("\r\n渗透系数Pg结果为：" + O2_Pg+"  cm3·cm/m2·h·0.1MPa");
-        
-        
-        jTextArea_output.append("\r\n扩散系数D结果为：" + O2_D+"  cm2/h，"+"   θ值为："+theta);
-        
-        
-        jTextArea_output.append("\r\n溶解度系数S结果为：" + O2_S+"  cm2/m2·0.1Mpa");
+        jTextArea_output.setText("透气量O2_GTR结果为：" + O2_GTR + "  cm3/m2·24h·0.1MPa");
+
+
+        jTextArea_output.append("\r\n渗透系数Pg结果为：" + O2_Pg + "  cm3·cm/m2·h·0.1MPa");
+
+
+        jTextArea_output.append("\r\n扩散系数D结果为：" + O2_D + "  cm2/h，" + "   θ值为：" + theta);
+
+
+        jTextArea_output.append("\r\n溶解度系数S结果为：" + O2_S + "  cm2/m2·0.1Mpa");
     }//GEN-LAST:event_jButton_VAC_computeActionPerformed
 
     private void jFormattedTextField_VAC_T0FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFormattedTextField_VAC_T0FocusGained
         ((JFormattedTextField) evt.getComponent()).setText(((JFormattedTextField) evt.getComponent()).getText());
         ((JFormattedTextField) evt.getComponent()).selectAll();
     }//GEN-LAST:event_jFormattedTextField_VAC_T0FocusGained
+
+    private void jButton_mathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_mathActionPerformed
+        // 1.取出TextArea的值
+        StringBuilder sb = new StringBuilder();
+
+        String inputstr = jTextArea_Input_math.getText();
+        List<String> choicelist = getList(inputstr);
+        List<Double> ds = new ArrayList<Double>();
+
+        //输入的数据，如果有重复的，可以用“数，个数”的形式表示，例如有13个1，可以写为“13，1”
+        //从字符床中解析
+        //整合到一个List中
+        for (int i = 0; i < choicelist.size(); i++) {
+            String tmpstr = choicelist.get(i);
+            tmpstr = tmpstr.replaceAll("[^0-9,，\\.]", "").trim();
+//            sb.append("从（").append(choicelist.get(i)).append("）替换为（").append(tmpstr).append("）\r\n");
+            int count = 0;
+            if (tmpstr.contains(",") || tmpstr.contains("，")) {
+                String a = tmpstr.substring(tmpstr.replaceAll("，", ",").lastIndexOf(",") + 1);
+//                sb.append("从（").append(tmpstr).append("）抽取a（").append(a).append("）\r\n");
+                count = Integer.parseInt(a);
+                tmpstr = tmpstr.substring(0, tmpstr.replaceAll("，", ",").indexOf(","));
+            } else {
+                count = 1;
+            }
+            for (int j = 0; j < count; j++) {
+                ds.add(Double.parseDouble(tmpstr));
+
+            }
+//            ds[i] = Double.parseDouble(tmpstr);
+        }
+
+        //倒为一个数组
+        double dsa[] = new double[ds.size()];
+        for (int i = 0; i < ds.size(); i++) {
+            dsa[i] = ds.get(i);
+        }
+        //如果只一个数/或者没数
+        if (dsa.length < 2) {
+            jTextArea_output.setText("一共没俩数，你糊弄傻小子呢？");
+            return;
+        }
+
+        Arrays.sort(dsa);
+        double min = dsa[0];//最小值
+        double max = dsa[dsa.length - 1];//最大值
+        double sum = 0;//和值
+        double avg = 0; //平均值
+        double variance = 0;//方差
+        double varianceSample = 0;//样本标准差
+        double StandardDeviation = 0;//随机变量标准差
+        double StandardDeviationSample = 0;//样本标准差
+
+        //求和值
+        for (int i = 0; i < dsa.length; i++) {
+            double d = dsa[i];
+            sum += d;
+        }
+        //求平均值
+        avg = sum / dsa.length;
+
+        //求方差
+        for (int i = 0; i < dsa.length; i++) {
+            double d = dsa[i];
+            variance += (d - avg) * (d - avg);
+        }
+        if(dsa.length>1){
+            varianceSample = variance/ (dsa.length-1);
+            variance= variance / (dsa.length);
+        }else{
+            
+        }
+
+        //样本标准差
+        StandardDeviationSample = Math.sqrt(varianceSample);
+        StandardDeviation = Math.sqrt(variance);
+
+        //输出格式设置
+        int k = 5;
+        try {
+            k = Integer.parseInt(jFormattedTextField_math_precision.getText());
+        } catch (Exception e) {
+        }
+        String formatstr = "#0";
+        if(k>0){
+            formatstr = formatstr + ".";
+        }
+        for (int i = 0; i < k; i++) {
+            formatstr = formatstr + "0";
+        }
+        DecimalFormat df = new DecimalFormat(formatstr);
+
+        sb.append("最小值为：").append(df.format(min)).append("\r\n");
+        sb.append("最大值为：").append(df.format(max)).append("\r\n");
+        sb.append("和值为：").append(df.format(sum)).append("\r\n");
+        sb.append("平均值为：").append(df.format(avg)).append("\r\n");
+        sb.append("方差为：").append(df.format(variance)).append("\r\n");
+        sb.append("样本方差为：").append(df.format(varianceSample)).append("\r\n");
+        sb.append("标准差（N-1）为：").append(df.format(StandardDeviationSample)).append("\r\n");
+        sb.append("标准差（N）为：").append(df.format(StandardDeviation)).append("\r\n");
+
+        jTextArea_output.setText(sb.toString());
+    }//GEN-LAST:event_jButton_mathActionPerformed
+
+    private void jRadioButton_vac_7210ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton_vac_7210ActionPerformed
+        
+        jFormattedTextField_VAC_V.setValue(33.033d);
+        jFormattedTextField_VAC_S.setValue(0.003848d);
+        jFormattedTextField_VAC_T.setValue(25d);
+        jFormattedTextField_VAC_T0.setValue(273.15d);
+        jFormattedTextField_VAC_P0.setValue(101300d);
+        jFormattedTextField_VAC_P1.setValue(1d);
+        jFormattedTextField_VAC_deltaT.setValue(3600d);
+        jFormattedTextField_VAC_deltaPstart.setValue(9d);
+        jFormattedTextField_VAC_deltaPend.setValue(150d);
+        jFormattedTextField_VAC_n.setValue(1d);
+        jFormattedTextField_VAC_d.setValue(125d);
+        jFormattedTextField_VAC_kuosanP1.setValue(150d);
+        jFormattedTextField_VAC_kuosanP2.setValue(100d);
+        jFormattedTextField_VAC_kuosanT1.setValue(7200d);
+        jFormattedTextField_VAC_kuosanT2.setValue(0d);
+        
+    }//GEN-LAST:event_jRadioButton_vac_7210ActionPerformed
+
+    private void jFormattedTextField_VAC_filmcaliFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFormattedTextField_VAC_filmcaliFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedTextField_VAC_filmcaliFocusGained
+
+    private void jRadioButton_vac_7200ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton_vac_7200ActionPerformed
+        jFormattedTextField_VAC_V.setValue(8.010d);
+        jFormattedTextField_VAC_S.setValue(0.003848d);
+        jFormattedTextField_VAC_T.setValue(25d);
+        jFormattedTextField_VAC_T0.setValue(273.15d);
+        jFormattedTextField_VAC_P0.setValue(101300d);
+        jFormattedTextField_VAC_P1.setValue(1d);
+        jFormattedTextField_VAC_P2.setValue(0d);
+        jFormattedTextField_VAC_deltaT.setValue(3600d);
+        jFormattedTextField_VAC_deltaPstart.setValue(9d);
+        jFormattedTextField_VAC_deltaPend.setValue(150d);
+        jFormattedTextField_VAC_n.setValue(3d);
+        jFormattedTextField_VAC_d.setValue(125d);
+        jFormattedTextField_VAC_kuosanP1.setValue(150d);
+        jFormattedTextField_VAC_kuosanP2.setValue(100d);
+        jFormattedTextField_VAC_kuosanT1.setValue(7200d);
+        jFormattedTextField_VAC_kuosanT2.setValue(0d);
+    }//GEN-LAST:event_jRadioButton_vac_7200ActionPerformed
+
+    private void jRadioButton_vac_7110ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton_vac_7110ActionPerformed
+        jFormattedTextField_VAC_V.setValue(20.2389d);
+        jFormattedTextField_VAC_S.setValue(0.002827d);
+        jFormattedTextField_VAC_T.setValue(25d);
+        jFormattedTextField_VAC_T0.setValue(273d);
+        jFormattedTextField_VAC_P0.setValue(101300d);
+        jFormattedTextField_VAC_P1.setValue(1d);
+        jFormattedTextField_VAC_P2.setValue(0d);
+        jFormattedTextField_VAC_deltaT.setValue(3600d);
+        jFormattedTextField_VAC_deltaPstart.setValue(9d);
+        jFormattedTextField_VAC_deltaPend.setValue(150d);
+        jFormattedTextField_VAC_n.setValue(3d);
+        jFormattedTextField_VAC_d.setValue(125d);
+        jFormattedTextField_VAC_kuosanP1.setValue(150d);
+        jFormattedTextField_VAC_kuosanP2.setValue(100d);
+        jFormattedTextField_VAC_kuosanT1.setValue(7200d);
+        jFormattedTextField_VAC_kuosanT2.setValue(0d);
+    }//GEN-LAST:event_jRadioButton_vac_7110ActionPerformed
+
+    private void jRadioButton_vac_7100ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton_vac_7100ActionPerformed
+        jFormattedTextField_VAC_V.setValue(8.01d);
+        jFormattedTextField_VAC_S.setValue(0.003848d);
+        jFormattedTextField_VAC_T.setValue(25d);
+        jFormattedTextField_VAC_T0.setValue(273.15d);
+        jFormattedTextField_VAC_P0.setValue(101300d);
+        jFormattedTextField_VAC_P1.setValue(1d);
+        jFormattedTextField_VAC_P2.setValue(0d);
+        jFormattedTextField_VAC_deltaT.setValue(3600d);
+        jFormattedTextField_VAC_deltaPstart.setValue(9d);
+        jFormattedTextField_VAC_deltaPend.setValue(150d);
+        jFormattedTextField_VAC_n.setValue(3d);
+        jFormattedTextField_VAC_d.setValue(125d);
+        jFormattedTextField_VAC_kuosanP1.setValue(150d);
+        jFormattedTextField_VAC_kuosanP2.setValue(100d);
+        jFormattedTextField_VAC_kuosanT1.setValue(7200d);
+        jFormattedTextField_VAC_kuosanT2.setValue(0d);
+    }//GEN-LAST:event_jRadioButton_vac_7100ActionPerformed
 
     private List<String> getList(String inputstr) {
         String[] inputsl = inputstr.split("\r|\n");
@@ -1408,10 +1760,17 @@ public class DeviceResultCompute extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup_vac;
     private javax.swing.JButton jButton_Compute_FD;
     private javax.swing.JButton jButton_RGT_compute;
     private javax.swing.JButton jButton_VAC_compute;
+    private javax.swing.JButton jButton_math;
     private javax.swing.JButton jButton_sly_compute;
     private javax.swing.JCheckBox jCheckBoxA;
     private javax.swing.JCheckBox jCheckBoxB;
@@ -1437,12 +1796,14 @@ public class DeviceResultCompute extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jFormattedTextField_VAC_deltaPend;
     private javax.swing.JFormattedTextField jFormattedTextField_VAC_deltaPstart;
     private javax.swing.JFormattedTextField jFormattedTextField_VAC_deltaT;
+    private javax.swing.JFormattedTextField jFormattedTextField_VAC_filmcali;
     private javax.swing.JFormattedTextField jFormattedTextField_VAC_kuosanP1;
     private javax.swing.JFormattedTextField jFormattedTextField_VAC_kuosanP2;
     private javax.swing.JFormattedTextField jFormattedTextField_VAC_kuosanT1;
     private javax.swing.JFormattedTextField jFormattedTextField_VAC_kuosanT2;
     private javax.swing.JFormattedTextField jFormattedTextField_VAC_n;
     private javax.swing.JFormattedTextField jFormattedTextField_deltaM;
+    private javax.swing.JFormattedTextField jFormattedTextField_math_precision;
     private javax.swing.JFormattedTextField jFormattedTextField_sly_P;
     private javax.swing.JFormattedTextField jFormattedTextField_sly_a;
     private javax.swing.JFormattedTextField jFormattedTextField_sly_a0;
@@ -1477,6 +1838,8 @@ public class DeviceResultCompute extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_VAC_kuosanT1;
     private javax.swing.JLabel jLabel_VAC_kuosanT2;
     private javax.swing.JLabel jLabel_VAC_n;
+    private javax.swing.JLabel jLabel_math;
+    private javax.swing.JLabel jLabel_math_precision;
     private javax.swing.JLabel jLabel_sly_a;
     private javax.swing.JLabel jLabel_sly_a0;
     private javax.swing.JLabel jLabel_sly_g;
@@ -1484,11 +1847,13 @@ public class DeviceResultCompute extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_sly_m;
     private javax.swing.JLabel jLabel_sly_n;
     private javax.swing.JLabel jLabel_sly_result;
+    private javax.swing.JLabel jLabel_vac_FilmCalibration;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel_Math;
     private javax.swing.JPanel jPanel_about;
     private javax.swing.JPanel jPanel_fallingdart;
     private javax.swing.JPanel jPanel_rgt;
@@ -1496,21 +1861,28 @@ public class DeviceResultCompute extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_sly_const;
     private javax.swing.JPanel jPanel_sly_variable;
     private javax.swing.JPanel jPanel_vac;
+    private javax.swing.JPanel jPanel_vac_other;
+    private javax.swing.JRadioButton jRadioButton_vac_7100;
+    private javax.swing.JRadioButton jRadioButton_vac_7110;
+    private javax.swing.JRadioButton jRadioButton_vac_7200;
+    private javax.swing.JRadioButton jRadioButton_vac_7210;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane_math;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane_about;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea_Input_FD;
+    private javax.swing.JTextArea jTextArea_Input_math;
     private javax.swing.JTextArea jTextArea_output;
     // End of variables declaration//GEN-END:variables
 
     private double getDoubleFromjFormattedTextField(JFormattedTextField jftf) throws NumberFormatException {
         double deltam;
         String sdeltam = jftf.getText();
-        if(sdeltam==null||sdeltam.equals("")){
-            sdeltam="0";
+        if (sdeltam == null || sdeltam.equals("")) {
+            sdeltam = "0";
         }
         deltam = Double.parseDouble(sdeltam);
         return deltam;

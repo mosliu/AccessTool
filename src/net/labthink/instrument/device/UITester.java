@@ -606,7 +606,7 @@ public class UITester extends javax.swing.JFrame {
         jLabel_about.setOpaque(true);
         jLabel_about.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        jLabel1.setText("<html>当前版本：V2.0.1<BR/>更新：<br/>1.增加事件信息的显示</html>");
+        jLabel1.setText("<html>当前版本：V2.0.17<BR/>更新：<br/>1.增加方差计算</html>");
 
         javax.swing.GroupLayout jPanel_aboutLayout = new javax.swing.GroupLayout(jPanel_about);
         jPanel_about.setLayout(jPanel_aboutLayout);
@@ -753,7 +753,7 @@ public class UITester extends javax.swing.JFrame {
         });
 
         jLabel_gkj_readme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icon/config.png"))); // NOI18N
-        jLabel_gkj_readme.setText("<html> 本功能用于模拟工控机<br/> 处理从设备传送过来的数据<br/> 解析成人可读数据<br/> 新增设备数据计算工具集 <br/> V2.0.15</html>");
+        jLabel_gkj_readme.setText("<html> 本功能用于模拟工控机<br/> 处理从设备传送过来的数据<br/> 解析成人可读数据<br/> 新增设备数据计算工具集 <br/> V2.0.19</html>");
         jLabel_gkj_readme.setFocusable(false);
 
         jButton_ACLPacketCount.setText("显示计数");
@@ -1841,6 +1841,7 @@ public class UITester extends javax.swing.JFrame {
 
     private void jButton_emptyoutputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_emptyoutputActionPerformed
         gpstream.clear();
+        System.setOut(gpstream);
 //        System.out.flush();
 //        System.out.close();
         jTextArea_output.setText("");
@@ -2597,6 +2598,7 @@ public class UITester extends javax.swing.JFrame {
                         }
                     }
                 }
+//                if (false) {
                 if (true) {
                     for (int i = 0; i < cs.length; i++) {
                         Component c = cs[i];

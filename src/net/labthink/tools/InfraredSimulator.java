@@ -445,6 +445,7 @@ public class InfraredSimulator extends javax.swing.JFrame {
             public void run() {
                 InfraredSimulator ut = new InfraredSimulator();
                 ut.setVisible(true);
+                ut.initOutput();
                 ut.gpstream = new GUIPrintStream(System.out, ut.jTextArea_output, true);
                 System.setOut(ut.gpstream);
                 
@@ -471,4 +472,8 @@ public class InfraredSimulator extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea_output;
     private javax.swing.JToggleButton jToggleButton_startStopAction;
     // End of variables declaration//GEN-END:variables
+
+    void initOutput() {
+        gpstream = new GUIPrintStream(System.out, jTextArea_output, true);
+    }
 }

@@ -5,6 +5,7 @@
 package net.labthink.tools;
 
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import net.labthink.utils.GUIPrintStream;
 
 /**
  *
@@ -35,6 +36,7 @@ public class ToolsNavigator extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jButton_random = new javax.swing.JButton();
         jButton_checksum = new javax.swing.JButton();
+        jButton_UnitConvert = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Moses' ToolSet");
@@ -69,10 +71,10 @@ public class ToolsNavigator extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton_Fallingdart)
-                    .addComponent(jButton_Infrared)
-                    .addComponent(jButton_ZigbeeSet))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton_Fallingdart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton_Infrared, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton_ZigbeeSet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -104,6 +106,13 @@ public class ToolsNavigator extends javax.swing.JFrame {
             }
         });
 
+        jButton_UnitConvert.setText("单位转换工具");
+        jButton_UnitConvert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_UnitConvertActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -111,8 +120,9 @@ public class ToolsNavigator extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton_random)
-                    .addComponent(jButton_checksum))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jButton_checksum)
+                    .addComponent(jButton_UnitConvert))
+                .addGap(0, 20, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,7 +131,9 @@ public class ToolsNavigator extends javax.swing.JFrame {
                 .addComponent(jButton_random)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton_checksum)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton_UnitConvert)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -132,7 +144,7 @@ public class ToolsNavigator extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 17, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,38 +160,41 @@ public class ToolsNavigator extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_randomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_randomActionPerformed
-        
+
         RandomSelect rs = new RandomSelect();
         rs.setVisible(true);
         rs.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        rs.setLocationRelativeTo(getOwner()); 
+        rs.setLocationRelativeTo(getOwner());
         this.dispose();
     }//GEN-LAST:event_jButton_randomActionPerformed
 
     private void jButton_FallingdartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_FallingdartActionPerformed
-       
+
         DeviceResultCompute rs = new DeviceResultCompute();
         rs.setVisible(true);
         rs.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        rs.setLocationRelativeTo(getOwner()); 
+        rs.setLocationRelativeTo(getOwner());
         this.dispose();
     }//GEN-LAST:event_jButton_FallingdartActionPerformed
 
     private void jButton_checksumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_checksumActionPerformed
         //2013.11.07 新增加校验和计算功能
-        
+
         CheckSumUI rs = new CheckSumUI();
         rs.setVisible(true);
         rs.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        rs.setLocationRelativeTo(getOwner()); 
+        rs.setLocationRelativeTo(getOwner());
         this.dispose();
     }//GEN-LAST:event_jButton_checksumActionPerformed
 
     private void jButton_InfraredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_InfraredActionPerformed
         InfraredSimulator rs = new InfraredSimulator();
+        rs.initOutput();
+        System.setOut(rs.gpstream);
         rs.setVisible(true);
         rs.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        rs.setLocationRelativeTo(getOwner()); 
+        rs.setLocationRelativeTo(getOwner());
+        System.out.println("Zigbee解析工具输出功能会受到影响，请重新启动或者点击清空重新激活");
         this.dispose();
     }//GEN-LAST:event_jButton_InfraredActionPerformed
 
@@ -187,9 +202,20 @@ public class ToolsNavigator extends javax.swing.JFrame {
         WEXUtil rs = new WEXUtil();
         rs.setVisible(true);
         rs.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        rs.setLocationRelativeTo(getOwner()); 
+        rs.setLocationRelativeTo(getOwner());
         this.dispose();
     }//GEN-LAST:event_jButton_ZigbeeSetActionPerformed
+
+    private void jButton_UnitConvertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_UnitConvertActionPerformed
+        UnitConverter rs = new UnitConverter();
+        rs.initOutput();
+        System.setOut(rs.gpstream);
+        rs.setVisible(true);
+        rs.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        rs.setLocationRelativeTo(getOwner());
+        System.out.println("Zigbee解析工具输出功能会受到影响，请重新启动或者点击清空重新激活");
+        this.dispose();
+    }//GEN-LAST:event_jButton_UnitConvertActionPerformed
 
     /**
      * @param args the command line arguments
@@ -228,6 +254,7 @@ public class ToolsNavigator extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Fallingdart;
     private javax.swing.JButton jButton_Infrared;
+    private javax.swing.JButton jButton_UnitConvert;
     private javax.swing.JButton jButton_ZigbeeSet;
     private javax.swing.JButton jButton_checksum;
     private javax.swing.JButton jButton_random;
