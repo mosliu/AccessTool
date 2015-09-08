@@ -228,6 +228,21 @@ public class LLTESTMessage implements Serializable {
 //        System.out.println(a ^ b);
         ByteBuffer bb = ByteBuffer.allocate(103);
         bb.put((byte) 0xa0);
+        
+        System.out.println(bb.position());
+        System.out.println(bb.limit());
+        bb.put((byte) 0xa0);
+        
+        System.out.println(bb.position());
+        System.out.println(bb.limit());
 
+//        bb.mark();
+        bb.flip();
+        System.out.println(bb.position());
+        System.out.println(bb.limit());
+        System.out.println("==============");
+//        bb = bb.compact();
+        byte[] array = bb.array();
+        System.out.println(array.length);
     }
 }

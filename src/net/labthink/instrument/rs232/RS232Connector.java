@@ -18,14 +18,7 @@ import org.apache.mina.transport.serial.SerialAddress.FlowControl;
 import org.apache.mina.transport.serial.SerialAddress.Parity;
 import org.apache.mina.transport.serial.SerialAddress.StopBits;
 
-/**
- * @author Administrator
- * 
- */
-/**
- * @author Administrator
- *
- */
+
 /**
  * @author Administrator
  *

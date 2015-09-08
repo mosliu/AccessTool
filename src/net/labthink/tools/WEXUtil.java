@@ -4,27 +4,24 @@
  */
 package net.labthink.tools;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import net.labthink.instrument.device.UILogger;
 import net.labthink.instrument.device.UITester;
 import net.labthink.instrument.device.intelligent.ZigbeeSettings.ZigbeeSettingsPacket;
 import net.labthink.instrument.device.intelligent.ZigbeeSettings.ZigbeeStatus;
 import net.labthink.instrument.device.intelligent.ZigbeeSettings.codec.ZigbeeSettingsProtocolCodecFactory;
 import net.labthink.instrument.device.intelligent.ZigbeeSettings.handler.ZigbeeSettingsHandler;
 import net.labthink.instrument.rs232.RS232Connector;
-import net.labthink.utils.BytePlus;
 import net.labthink.utils.GUIPrintStream;
 import org.apache.mina.core.RuntimeIoException;
-import org.apache.mina.core.future.ReadFuture;
 import org.apache.mina.core.future.WriteFuture;
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
@@ -32,6 +29,7 @@ import org.apache.mina.filter.codec.ProtocolCodecFactory;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.transport.serial.SerialAddress;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -39,6 +37,7 @@ import org.apache.mina.transport.serial.SerialAddress;
  */
 public class WEXUtil extends javax.swing.JFrame {
 
+    private static final org.slf4j.Logger log = LoggerFactory.getLogger(WEXUtil.class);
     /**
      * Creates new form WEXUtil
      */
@@ -672,7 +671,6 @@ public class WEXUtil extends javax.swing.JFrame {
                 }
             }
 
-
             receiver.endListen();
             disableSettings();
 
@@ -708,7 +706,6 @@ public class WEXUtil extends javax.swing.JFrame {
         sendRegisterPacket(pkt, regno, waittime, session);
 
         // this.wait(100);
-
         //校验位
         regno = 0x67;//103
         waittime = 1000;
@@ -749,7 +746,6 @@ public class WEXUtil extends javax.swing.JFrame {
         int setvalue = -1;
         ZigbeeSettingsPacket pkt;
 
-
         //校验位
         regno = 0x67;//103
         waittime = 1000;
@@ -770,9 +766,6 @@ public class WEXUtil extends javax.swing.JFrame {
         pkt.setRestartFlag(true);
         sendRegisterPacketSlow(pkt, regno, waittime, session);
         jComboBox_BaudRate.setSelectedItem(jComboBox_BaudRateSet.getSelectedItem());
-
-
-
 
 //        initReceiver(handler, new ZigbeeSettingsProtocolCodecFactory());    
 //        receiver.startListen();
@@ -892,7 +885,6 @@ public class WEXUtil extends javax.swing.JFrame {
         sendRegisterPacketSlow(pkt, 0x8F, 2000, session);
 
 
-
     }//GEN-LAST:event_jButton_common_writeActionPerformed
 
     private void jButton_common_readActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_common_readActionPerformed
@@ -911,7 +903,6 @@ public class WEXUtil extends javax.swing.JFrame {
         sendRegisterPacket(pkt, regno, waittime, session);
 
         // this.wait(100);
-
         //通道
         regno = 0x72;//114
         waittime = 1000;
@@ -943,7 +934,6 @@ public class WEXUtil extends javax.swing.JFrame {
         waittime = 1000;
         pkt = ZigbeeSettingsPacket.getRegisterPacket(regno);
         sendRegisterPacket(pkt, regno, waittime, session);
-
 
         //NetID_Upper
         regno = 0xBE;//190
@@ -992,7 +982,6 @@ public class WEXUtil extends javax.swing.JFrame {
         pkt.setRestartFlag(true);
         sendRegisterPacketSlow(pkt, 0x90, 5000, session);
         this.jComboBox_BaudRate.setSelectedItem("38400");
-        
 
 
     }//GEN-LAST:event_jButton_ResetZigbeeActionPerformed
@@ -1048,7 +1037,6 @@ public class WEXUtil extends javax.swing.JFrame {
         } catch (InterruptedException ex) {
             Logger.getLogger(WEXUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
-
 
         //进透传
         String addr = jFormattedTextField_TransModeAddr.getText();
@@ -1327,7 +1315,20 @@ public class WEXUtil extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 WEXUtil ut = new WEXUtil();
-                ut.setVisible(true);
+                try {
+                    Date today = new Date();
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                    Date afterdate = format.parse("2015-08-02");// Try catch省略了
+                    if (today.after(afterdate)) {
+                        ut.dispose();
+                    } else {
+                        ut.setVisible(true);
+                    }
+                } catch (ParseException ex) {
+                    log.error(ex.getMessage());
+                    // Logger.getLogger(MDIUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+//                ut.setVisible(true);
                 ut.gpstream = new GUIPrintStream(System.out, ut.jTextArea_output, true);
                 System.setOut(ut.gpstream);
 
@@ -1335,9 +1336,6 @@ public class WEXUtil extends javax.swing.JFrame {
 //                new InfraredSimulator().setVisible(true);
             }
         });
-
-
-
 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1457,7 +1455,6 @@ public class WEXUtil extends javax.swing.JFrame {
 //            } else {
 //                System.out.println(queue.size());
 
-
             ZigbeeSettingsPacket pkt = queue.poll();
             if (pkt != null && session != null) {
 //                System.out.println(queue.size());
@@ -1482,7 +1479,6 @@ public class WEXUtil extends javax.swing.JFrame {
             } catch (InterruptedException ex) {
                 Logger.getLogger(WEXUtil.class.getName()).log(Level.SEVERE, null, ex);
             }
-
 
         }
 

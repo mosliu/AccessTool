@@ -1109,7 +1109,7 @@
                 <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField_VAC_P1">
                   <Properties>
                     <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-                      <Format format="#0.000" subtype="-1" type="0"/>
+                      <Format format="#0.00000" subtype="-1" type="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="1"/>
                     <Property name="toolTipText" type="java.lang.String" value="&#x9ad8;&#x538b;&#x8154;&#x538b;&#x529b;"/>
@@ -1127,7 +1127,7 @@
                 <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField_VAC_P2">
                   <Properties>
                     <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-                      <Format format="#0.000" subtype="-1" type="0"/>
+                      <Format format="#0.00000" subtype="-1" type="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="0"/>
                     <Property name="toolTipText" type="java.lang.String" value="&#x4f4e;&#x538b;&#x8154;&#x538b;&#x529b;"/>

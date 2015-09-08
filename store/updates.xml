@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <updateDescriptor baseUrl="">
-  <entry targetMediaFileId="45" updatableVersionMin="" updatableVersionMax="" fileName="InstrumentTester_windows_2_0_19.exe" newVersion="2.0.19" newMediaFileId="45" fileSize="29323776" bundledJre="windows-x86-1.7.0_03" archive="false">
-    <comment />
+  <entry targetMediaFileId="45" updatableVersionMin="" updatableVersionMax="" fileName="WEX-01Utils_windows_1_0_0_2.exe" newVersion="1.0.0.2" newMediaFileId="45" fileSize="36815360" bundledJre="windows-x86-1.7.0_55" archive="false">
+    <comment language="zh_CN" />
   </entry>
 </updateDescriptor>
 

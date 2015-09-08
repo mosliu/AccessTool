@@ -1,8 +1,6 @@
 package net.labthink.instrument.device.Coder.codec;
 
 import net.labthink.instrument.device.Coder.message.CoderMessage;
-import net.labthink.instrument.device.LLTEST.message.LLTESTMessage;
-
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.demux.MessageDecoder;

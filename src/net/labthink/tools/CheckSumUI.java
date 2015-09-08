@@ -7,7 +7,6 @@ package net.labthink.tools;
 import java.util.zip.CRC32;
 import net.labthink.utils.BytePlus;
 import net.labthink.utils.CRC16Util;
-import sun.misc.CRC16;
 
 /**
  *

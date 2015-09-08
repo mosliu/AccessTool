@@ -1,0 +1,3 @@
+# List of generated media files. The columns are tab-separated:
+# id | media file type | display name | media file path
+45	windows	Windows	D:\Workspaces\instrument_framework\store\WEX-01Utils_windows_1_0_0_2.exe

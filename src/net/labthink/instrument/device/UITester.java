@@ -9,7 +9,7 @@
  * Created on 2010-4-21, 10:12:06
  */
 package net.labthink.instrument.device;
- 
+
 import java.awt.*;
 import java.io.File;
 import java.io.FileWriter;
@@ -24,12 +24,12 @@ import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
-
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.filechooser.FileSystemView;
 import net.labthink.instrument.device.CHYCA.codec.CHYCAProtocolCodecFactory;
 import net.labthink.instrument.device.CHYCA.handler.CHYCAHandler;
 import net.labthink.instrument.device.CHYCA.message.CHYCAOutMessage;
@@ -40,9 +40,12 @@ import net.labthink.instrument.device.Coder.message.CoderMessage;
 import net.labthink.instrument.device.CommandSender.CommandSenderTester01;
 import net.labthink.instrument.device.CommandSender.codec.CommandSenderProtocolCodecFactory;
 import net.labthink.instrument.device.CommandSender.handler.CommandSenderHandler;
-
 import net.labthink.instrument.device.FPTF1.codec.FPTF1ProtocolCodecFactory;
 import net.labthink.instrument.device.FPTF1.handler.FPTF1Handler;
+import net.labthink.instrument.device.Fluke45.codec.Fluke45ProtocolCodecFactory;
+import net.labthink.instrument.device.Fluke45.handler.Fluck45Handler;
+import net.labthink.instrument.device.Fluke45.handler.SartoriusHandler;
+import net.labthink.instrument.device.Fluke45.utils.Fluke45Chart;
 import net.labthink.instrument.device.G2131.codec.G2131ProtocolCodecFactory;
 import net.labthink.instrument.device.G2131.handler.G2131Handler;
 import net.labthink.instrument.device.LLTEST.codec.LLTESTProtocolCodecFactory;
@@ -73,7 +76,6 @@ import net.labthink.utils.FilePlus;
 import net.labthink.utils.GUIPrintStream;
 import org.apache.mina.core.RuntimeIoException;
 import org.apache.mina.core.future.WriteFuture;
-
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
@@ -87,6 +89,7 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.labels.StandardXYToolTipGenerator;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.time.Millisecond;
@@ -223,6 +226,19 @@ public class UITester extends javax.swing.JFrame {
         jLabel_MinDeg = new javax.swing.JLabel();
         jPanel_codershow = new javax.swing.JPanel();
         jButton_CoderReset = new javax.swing.JButton();
+        jPanel_Fluke45 = new javax.swing.JPanel();
+        jToggleButton_Fluke45 = new javax.swing.JToggleButton();
+        jButton_flushlog = new javax.swing.JButton();
+        jTextField_comment = new javax.swing.JTextField();
+        jButtonComment = new javax.swing.JButton();
+        jButton_pauseDarw = new javax.swing.JButton();
+        jPanel_FlukeShow = new javax.swing.JPanel();
+        jCheckBox_flukedraw = new javax.swing.JCheckBox();
+        jCheckBox_FlukeClearChart = new javax.swing.JCheckBox();
+        jButton2 = new javax.swing.JButton();
+        jPanel_Sartorius = new javax.swing.JPanel();
+        jToggleButton_sartorius = new javax.swing.JToggleButton();
+        jCheckBox_detailout = new javax.swing.JCheckBox();
         jPanel_functions = new javax.swing.JPanel();
         jPanel_comportset = new javax.swing.JPanel();
         jLabel_ComPort = new javax.swing.JLabel();
@@ -299,6 +315,8 @@ public class UITester extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("辅助测试工具集");
+
+        jTabbedPane_All.setName("showsartorius"); // NOI18N
 
         jToggleButton_g2131.setText("开始");
         jToggleButton_g2131.addActionListener(new java.awt.event.ActionListener() {
@@ -753,7 +771,7 @@ public class UITester extends javax.swing.JFrame {
         });
 
         jLabel_gkj_readme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/icon/config.png"))); // NOI18N
-        jLabel_gkj_readme.setText("<html> 本功能用于模拟工控机<br/> 处理从设备传送过来的数据<br/> 解析成人可读数据<br/> 新增设备数据计算工具集 <br/> V2.0.19</html>");
+        jLabel_gkj_readme.setText("<html> 本功能用于模拟工控机<br/> 处理从设备传送过来的数据<br/> 解析成人可读数据<br/> 新增设备数据计算工具集 <br/> V2.0.20</html>");
         jLabel_gkj_readme.setFocusable(false);
 
         jButton_ACLPacketCount.setText("显示计数");
@@ -1206,6 +1224,148 @@ public class UITester extends javax.swing.JFrame {
 
         jTabbedPane_All.addTab("编码器测试", jPanel_Coder);
 
+        jPanel_Fluke45.setName("showfluke45"); // NOI18N
+
+        jToggleButton_Fluke45.setText("开始");
+        jToggleButton_Fluke45.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton_Fluke45ActionPerformed(evt);
+            }
+        });
+
+        jButton_flushlog.setText("savelog");
+        jButton_flushlog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_flushlogActionPerformed(evt);
+            }
+        });
+
+        jTextField_comment.setText("comment");
+
+        jButtonComment.setText("Add comment");
+        jButtonComment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCommentActionPerformed(evt);
+            }
+        });
+
+        jButton_pauseDarw.setText("Pause");
+        jButton_pauseDarw.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_pauseDarwActionPerformed(evt);
+            }
+        });
+
+        jPanel_FlukeShow.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jCheckBox_flukedraw.setSelected(true);
+        jCheckBox_flukedraw.setText("Draw ");
+
+        jCheckBox_FlukeClearChart.setText("Clear");
+
+        javax.swing.GroupLayout jPanel_FlukeShowLayout = new javax.swing.GroupLayout(jPanel_FlukeShow);
+        jPanel_FlukeShow.setLayout(jPanel_FlukeShowLayout);
+        jPanel_FlukeShowLayout.setHorizontalGroup(
+            jPanel_FlukeShowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_FlukeShowLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel_FlukeShowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBox_flukedraw, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jCheckBox_FlukeClearChart, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
+        );
+        jPanel_FlukeShowLayout.setVerticalGroup(
+            jPanel_FlukeShowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_FlukeShowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jCheckBox_flukedraw)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCheckBox_FlukeClearChart)
+                .addContainerGap(90, Short.MAX_VALUE))
+        );
+
+        jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel_Fluke45Layout = new javax.swing.GroupLayout(jPanel_Fluke45);
+        jPanel_Fluke45.setLayout(jPanel_Fluke45Layout);
+        jPanel_Fluke45Layout.setHorizontalGroup(
+            jPanel_Fluke45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_Fluke45Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel_Fluke45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_Fluke45Layout.createSequentialGroup()
+                        .addComponent(jToggleButton_Fluke45)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton_flushlog)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton_pauseDarw)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonComment)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_comment, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 25, Short.MAX_VALUE))
+                    .addComponent(jPanel_FlukeShow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel_Fluke45Layout.setVerticalGroup(
+            jPanel_Fluke45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Fluke45Layout.createSequentialGroup()
+                .addComponent(jPanel_FlukeShow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel_Fluke45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jToggleButton_Fluke45)
+                    .addComponent(jButton_flushlog)
+                    .addComponent(jButtonComment)
+                    .addComponent(jButton_pauseDarw)
+                    .addComponent(jTextField_comment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
+                .addContainerGap())
+        );
+
+        jTabbedPane_All.addTab("Fluke45", jPanel_Fluke45);
+
+        jPanel_Sartorius.setName("showsartorius"); // NOI18N
+
+        jToggleButton_sartorius.setText("开始");
+        jToggleButton_sartorius.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton_sartoriusActionPerformed(evt);
+            }
+        });
+
+        jCheckBox_detailout.setSelected(true);
+        jCheckBox_detailout.setText("Detailout");
+
+        javax.swing.GroupLayout jPanel_SartoriusLayout = new javax.swing.GroupLayout(jPanel_Sartorius);
+        jPanel_Sartorius.setLayout(jPanel_SartoriusLayout);
+        jPanel_SartoriusLayout.setHorizontalGroup(
+            jPanel_SartoriusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel_SartoriusLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel_SartoriusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBox_detailout)
+                    .addComponent(jToggleButton_sartorius))
+                .addContainerGap(581, Short.MAX_VALUE))
+        );
+        jPanel_SartoriusLayout.setVerticalGroup(
+            jPanel_SartoriusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_SartoriusLayout.createSequentialGroup()
+                .addContainerGap(113, Short.MAX_VALUE)
+                .addComponent(jCheckBox_detailout)
+                .addGap(18, 18, 18)
+                .addComponent(jToggleButton_sartorius)
+                .addContainerGap())
+        );
+
+        jTabbedPane_All.addTab("Sartorius", jPanel_Sartorius);
+
         jPanel_functions.setBorder(javax.swing.BorderFactory.createTitledBorder("功能设置"));
 
         jPanel_comportset.setBorder(javax.swing.BorderFactory.createTitledBorder("串口设置"));
@@ -1213,16 +1373,16 @@ public class UITester extends javax.swing.JFrame {
         jLabel_ComPort.setText("端口设置");
 
         jComboBox_ComPort.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9", "COM10", "COM11", "COM12", "COM13", "COM14", "COM15", "COM16", "COM17", "COM18", "COM19", "COM20", "COM21", "COM22", "COM23", "COM24", "COM25", "COM26", "COM27", "COM28", "COM29", "COM30", "COM31", "COM32" }));
-        jComboBox_ComPort.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox_ComPortActionPerformed(evt);
-            }
-        });
 
         jLabel_BaudRate.setText("速率");
 
         jComboBox_BaudRate.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "110", "300", "600", "1200", "2400", "4800", "9600", "14400", "19200", "38400", "43000", "56000", "57600", "115200" }));
         jComboBox_BaudRate.setSelectedIndex(13);
+        jComboBox_BaudRate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox_BaudRateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel_comportsetLayout = new javax.swing.GroupLayout(jPanel_comportset);
         jPanel_comportset.setLayout(jPanel_comportsetLayout);
@@ -1362,7 +1522,7 @@ public class UITester extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane_All, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane_All, javax.swing.GroupLayout.PREFERRED_SIZE, 233, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel_functions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1375,6 +1535,7 @@ public class UITester extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+   
     private void jButton_httl1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_httl1ActionPerformed
         //JOptionPane.showMessageDialog(this, testtype, "TestType Value", JOptionPane.INFORMATION_MESSAGE);
 //        JOptionPane.showMessageDialog(this, jComboBox_ComPort.getSelectedItem(), "TestType Value", JOptionPane.INFORMATION_MESSAGE);
@@ -1386,8 +1547,6 @@ public class UITester extends javax.swing.JFrame {
             receiver.endListen();
         }
         RS232Connector receiver = RS232Connector.getInstance(handler, portAddress);
-
-
 
         receiver.removeFilter("logger");
         receiver.removeFilter("codec");
@@ -1456,7 +1615,6 @@ public class UITester extends javax.swing.JFrame {
                 break;
             default:
         }
-
 
 
     }//GEN-LAST:event_jButton_calcActionPerformed
@@ -1528,8 +1686,6 @@ public class UITester extends javax.swing.JFrame {
 //                g.drawString(a, x, y);
 //            }
         }, 0, 1000);
-
-
 
         if (receiver != null) {
             receiver.endListen();
@@ -1701,16 +1857,11 @@ public class UITester extends javax.swing.JFrame {
 //        short iaddr = Short.parseShort(addr);
 
 //        device.setDestaddr(iaddr);
-
         handler = new LLTESTHandler(device);
 
 //        System.setOut(new GUIPrintStream(System.out, textArea));
-
-
 //        ((LLTESTHandler) handler).setOuts(new GUIPrintStream(System.out, jTextArea_output));
-
 //        jTextArea_output.getDocument().
-
         if (receiver != null) {
             receiver.endListen();
         }
@@ -1752,17 +1903,12 @@ public class UITester extends javax.swing.JFrame {
         //((FPTF1Handler) handler).loadData();
         CHYCA device = new CHYCA();
 
-
-
         handler = new CHYCAHandler(device);
 
         System.setOut(new GUIPrintStream(System.out, jTextArea_output));
 
-
 //        ((CHYCAHandler) handler).setOuts(new GUIPrintStream(System.out, jTextArea_output));
-
 //        jTextArea_output.getDocument().
-
         if (receiver != null) {
             receiver.endListen();
         }
@@ -1799,7 +1945,6 @@ public class UITester extends javax.swing.JFrame {
 //        System.out.println(maxgen);
 //        System.out.println(mingen);
 //        System.out.println(sendcount);
-
         if (jToggleButton_chyca.isSelected()) {
             final CHYCA device = new CHYCA();
             device.init(maxgen, mingen);
@@ -1831,7 +1976,6 @@ public class UITester extends javax.swing.JFrame {
             });
             t1.start();
 
-
         } else {
             JOptionPane.showMessageDialog(jLabel_ComPort, "串口未打开");
         }
@@ -1839,62 +1983,13 @@ public class UITester extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton_chyca_sendActionPerformed
 
-    private void jButton_emptyoutputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_emptyoutputActionPerformed
-        gpstream.clear();
-        System.setOut(gpstream);
-//        System.out.flush();
-//        System.out.close();
-        jTextArea_output.setText("");
-//        System.setOut(new GUIPrintStream(System.out, ut.jTextArea_output));
-
-    }//GEN-LAST:event_jButton_emptyoutputActionPerformed
-
-    private void jButton_saveoutputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_saveoutputActionPerformed
-//        JOptionPane.showConfirmDialog(jLabel_ComPort, "本功能暂未实现，留待下一版本想起来再说");
-        ExtensionFileFilter filter = new ExtensionFileFilter("log,txt", true);
-        filter.setDescription("日志文件 ");
-
-        JFileChooser jfc = new JFileChooser();
-        jfc.setDialogTitle("选择保存位置");
-        jfc.setMultiSelectionEnabled(false);
-        jfc.setDialogType(JFileChooser.SAVE_DIALOG);
-        jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        jfc.setFileFilter(filter);
-        int result = jfc.showOpenDialog(this);  // 打开"打开文件"对话框
-        if (result == JFileChooser.APPROVE_OPTION) {
-            String file = jfc.getSelectedFile().getAbsolutePath();
-            int dotindex = file.indexOf(".");
-            if (dotindex < 0) {
-                file = file + ".log";
-            }
-            try {
-                FileWriter fw = new FileWriter(file, true);
-//                FileWriter fw = new FileWriter(jfc.getSelectedFile(), true);
-                fw.append(jTextArea_output.getText());
-                fw.close();
-            } catch (IOException ex) {
-                Logger.getLogger(UITester.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            //        int ibaudrate = Integer.parseInt((String)jComboBox_BaudRate.getSelectedItem());
-            //        int baudrate = (Integer)jComboBox_BaudRate.getSelectedItem();
-            //        System.out.println(baudrate);
-            //        System.out.println("aaa");
-        }
-
-
-//        int ibaudrate = Integer.parseInt((String)jComboBox_BaudRate.getSelectedItem());
-//        int baudrate = (Integer)jComboBox_BaudRate.getSelectedItem();
-//        System.out.println(baudrate);
-//        System.out.println("aaa");
-    }//GEN-LAST:event_jButton_saveoutputActionPerformed
-
     private void jToggleButton_ACLPacketReadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton_ACLPacketReadActionPerformed
 
 //        portAddress = new SerialAddress((String) jComboBox_ComPort.getSelectedItem(), 9600, DataBits.DATABITS_8, StopBits.BITS_1, Parity.NONE,
 //                FlowControl.NONE);
         portAddress = getserialport();
 
-        if (handler == null) { 
+        if (handler == null) {
             handler = new industrialpcHandler();
         }
 //        SimpleDateFormat sdf = new  SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
@@ -1903,9 +1998,8 @@ public class UITester extends javax.swing.JFrame {
         ((industrialpcHandler) handler).printflag = isprintflag;
         boolean printdetail = jCheckBox_detailPacket.isSelected();
         ((industrialpcHandler) handler).printdetail = printdetail;
-        
-        //((FPTF1Handler) handler).loadData();
 
+        //((FPTF1Handler) handler).loadData();
         if (receiver != null) {
             receiver.endListen();
         }
@@ -1995,7 +2089,6 @@ public class UITester extends javax.swing.JFrame {
         }
 
 //        receiver.addFilter("logger", new LoggingFilter());
-
         // receiver.addFilter("codec", new ProtocolCodecFilter(
         // new TextLineCodecFactory(Charset.forName("UTF-8")))); // 设置编码过滤器
         if (jToggleButton_lltest2.isSelected()) {
@@ -2023,33 +2116,11 @@ public class UITester extends javax.swing.JFrame {
         System.out.println("清空计数，当前计数：0");
     }//GEN-LAST:event_jButton_clearcountActionPerformed
 
-    private void jCheckBox_autoclearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_autoclearActionPerformed
-        // TODO add your handling code here:
-        if (jCheckBox_autoclear.isSelected()) {
-            jFormattedTextField_autoclear.setEnabled(true);
-            jFormattedTextField_autoclear.setValue(20000);
-            gpstream.setAutoclear(true);
-            gpstream.setAutoclearcount((Integer) jFormattedTextField_autoclear.getValue());
-        } else {
-            jFormattedTextField_autoclear.setEnabled(false);
-            jFormattedTextField_autoclear.setText("");
-            gpstream.setAutoclear(false);
-//            jFormattedTextField_autoclear.setValue(0);
-        }
-    }//GEN-LAST:event_jCheckBox_autoclearActionPerformed
-
-    private void jFormattedTextField_autoclearFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFormattedTextField_autoclearFocusLost
-        gpstream.setAutoclearcount((Integer) jFormattedTextField_autoclear.getValue());
-        System.out.println("设置自动清空上限为：" + (Integer) jFormattedTextField_autoclear.getValue());
-    }//GEN-LAST:event_jFormattedTextField_autoclearFocusLost
-
     private void jToggleButton_mxd02ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton_mxd02ActionPerformed
         //JOptionPane.showMessageDialog(this, testtype, "TestType Value", JOptionPane.INFORMATION_MESSAGE);
 //        JOptionPane.showMessageDialog(this, jComboBox_ComPort.getSelectedItem(), "TestType Value", JOptionPane.INFORMATION_MESSAGE);
 //        portAddress = new SerialAddress((String) jComboBox_ComPort.getSelectedItem(), 9600, DataBits.DATABITS_8, StopBits.BITS_1, Parity.NONE,
 //                FlowControl.NONE);
-
-
 
         portAddress = getserialport();
         handler = new MXD02Handler();
@@ -2065,7 +2136,6 @@ public class UITester extends javax.swing.JFrame {
         // receiver.addFilter("codec", new ProtocolCodecFilter(
         // new TextLineCodecFactory(Charset.forName("UTF-8")))); // 设置编码过滤器
 
-
         try {
             jFormattedTextField_mxd02_times.commitEdit();
             jFormattedTextField_mxd02_range.commitEdit();
@@ -2078,8 +2148,6 @@ public class UITester extends javax.swing.JFrame {
         MXD02 device = new MXD02();
         device.setTesttimes(times);
         device.setRange(range);
-
-
 
         MXD02Tester01 test = new MXD02Tester01(receiver);
         test.setDevice(device);
@@ -2100,26 +2168,7 @@ public class UITester extends javax.swing.JFrame {
         }
 
 
-
     }//GEN-LAST:event_jToggleButton_mxd02ActionPerformed
-
-    private void jCheckBox_autosaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_autosaveActionPerformed
-        // TODO add your handling code here:
-        // TODO add your handling code here:
-        if (jCheckBox_autosave.isSelected()) {
-//            jFormattedTextField_autoclear.setEnabled(true);
-//            jFormattedTextField_autoclear.setValue(20000);
-            gpstream.setLogFileFlag(true);
-//            gpstream.setAutoclear(true);
-//            gpstream.setAutoclearcount((Integer) jFormattedTextField_autoclear.getValue());
-        } else {
-            gpstream.setLogFileFlag(false);
-//            jFormattedTextField_autoclear.setEnabled(false);
-//            jFormattedTextField_autoclear.setText("");
-//            gpstream.setAutoclear(false);
-//            jFormattedTextField_autoclear.setValue(0);
-        }
-    }//GEN-LAST:event_jCheckBox_autosaveActionPerformed
 
     private void jButton_ToParseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ToParseActionPerformed
         String parsestr = jTextArea_ToParse.getText();
@@ -2139,9 +2188,6 @@ public class UITester extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_ToParseActionPerformed
 
     private void jToggleButton_commandSenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton_commandSenderActionPerformed
-
-
-
 
         portAddress = getserialport();
         handler = new CommandSenderHandler();
@@ -2164,7 +2210,6 @@ public class UITester extends javax.swing.JFrame {
 //        } catch (ParseException ex) {
 //            Logger.getLogger(UITester.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-
         String InputCommand = jTextArea_command.getText();
         if (InputCommand.length() < 2) {
             if (jToggleButton_commandSender.isSelected()) {
@@ -2220,6 +2265,9 @@ public class UITester extends javax.swing.JFrame {
         filter.setDescription("命令文件");
 
         JFileChooser jfc = new JFileChooser();
+        FileSystemView fsv = FileSystemView.getFileSystemView();
+        //得到桌面路径
+        jfc.setCurrentDirectory(fsv.getHomeDirectory());
         jfc.setDialogTitle("选择文件位置");
         jfc.setMultiSelectionEnabled(false);
         jfc.setDialogType(JFileChooser.OPEN_DIALOG);
@@ -2295,7 +2343,6 @@ public class UITester extends javax.swing.JFrame {
         receiver.addFilter("logger", new LoggingFilter());
         receiver.addFilter("codec", new ProtocolCodecFilter(new CoderProtocolCodecFactory()));    // 设置编码过滤器
 
-
         //绘图
         TimeSeries ts = new TimeSeries("当前值", Millisecond.class);
         TimeSeries ts1 = new TimeSeries("最大值", Millisecond.class);
@@ -2330,8 +2377,6 @@ public class UITester extends javax.swing.JFrame {
         chartPanel.setSize(800, 360);
         chartPanel.setPreferredSize(new Dimension(600, 502));
         jPanel_codershow.add(chartPanel, BorderLayout.CENTER);
-
-
 
         if (jToggleButton_Coder.isSelected()) {
             try {
@@ -2388,9 +2433,7 @@ public class UITester extends javax.swing.JFrame {
                 }
             };
 
-
             timer.scheduleAtFixedRate(tt, 50, 1000);
-
 
             jToggleButton_Coder.setText("关闭");
         } else {
@@ -2425,12 +2468,9 @@ public class UITester extends javax.swing.JFrame {
 //            System.out.println(year);
         //public ALCpacket(byte[] _devicenum, byte[] _testnum, byte[] _testkind, byte[] _packetbody) {
 
-
-
-
         boolean testflag = false;
 
-        if (!(jToggleButton_ACLPacketRead.isSelected()||testflag)) {
+        if (!(jToggleButton_ACLPacketRead.isSelected() || testflag)) {
             System.out.println("请检查串口");
         } else {
             String command = buttonGroup_lockstatus.getSelection().getActionCommand();
@@ -2453,50 +2493,48 @@ public class UITester extends javax.swing.JFrame {
             byte[] outtime = {year, month, day, hour, minute, second, 0, 0};
             byte[] reserve1 = new byte[8];
             byte[] reserve2 = new byte[48];
-            byte[] packetbody = new byte[1+8+2+8+48];
-            
-            
-            int currpos =0;
-            packetbody[0] = (byte)0x9C;
-            currpos +=1;
+            byte[] packetbody = new byte[1 + 8 + 2 + 8 + 48];
+
+            int currpos = 0;
+            packetbody[0] = (byte) 0x9C;
+            currpos += 1;
             System.arraycopy(outtime, 0, packetbody, currpos, outtime.length);//8位 时间编码
-            currpos +=outtime.length;
+            currpos += outtime.length;
             System.arraycopy(cmd, 0, packetbody, currpos, cmd.length);
-            currpos +=cmd.length;
+            currpos += cmd.length;
             System.arraycopy(reserve1, 0, packetbody, currpos, reserve1.length);
-            currpos +=reserve1.length;
+            currpos += reserve1.length;
             System.arraycopy(reserve2, 0, packetbody, currpos, reserve2.length);
-            currpos +=reserve2.length;
+            currpos += reserve2.length;
 //            System.out.println("pos:"+currpos);
 //            System.out.println("packetbody:"+packetbody.length);
 //            System.out.println(BytePlus.byteArray2String(packetbody));
 //            System.out.println("=============");
 
-
             byte[] devicenum = {1, 1, 13, 10, 10};
             byte[] testnum = {10, 0, 0, 0};
             byte[] testkind = {0, 0};
             ALCpacket alcp = new ALCpacket(devicenum, testnum, testkind, packetbody);
-            
+
             //拼zigbee头
             byte[] zigbeehead = new byte[5];
-            
-            byte head_control = (byte) (((new Random()).nextInt()%15+15)%15);
+
+            byte head_control = (byte) (((new Random()).nextInt() % 15 + 15) % 15);
 //            System.out.println(head_control);
-            head_control = (byte) (head_control+0xA0);
-            zigbeehead[0]=head_control;
-            
+            head_control = (byte) (head_control + 0xA0);
+            zigbeehead[0] = head_control;
+
             byte lqi = 0x7F;
-            zigbeehead[1]=lqi;
-            
+            zigbeehead[1] = lqi;
+
             String id = jFormattedTextField_lockid.getText();
             int tempi = Integer.parseInt(id);
-            zigbeehead[2]=(byte) (tempi/256);
-            zigbeehead[3]=(byte) (tempi%256);
+            zigbeehead[2] = (byte) (tempi / 256);
+            zigbeehead[3] = (byte) (tempi % 256);
             byte length = (byte) alcp.getWholePacket().length;
-            zigbeehead[4]=length;
+            zigbeehead[4] = length;
 //            System.out.println(BytePlus.byteArray2String(zigbeehead));
-            ZigbeePacket zp = new ZigbeePacket(zigbeehead,alcp);
+            ZigbeePacket zp = new ZigbeePacket(zigbeehead, alcp);
             byte[] a = zp.getAllPacket();
             System.out.println(BytePlus.byteArray2String(a));
 //终于，包拼接的差不多了。
@@ -2513,13 +2551,326 @@ public class UITester extends javax.swing.JFrame {
         ToolsNavigator rs = new ToolsNavigator();
         rs.setVisible(true);
         rs.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        rs.setLocationRelativeTo(getOwner()); 
+        rs.setLocationRelativeTo(getOwner());
 
     }//GEN-LAST:event_jButton_toolsActionPerformed
 
-    private void jComboBox_ComPortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_ComPortActionPerformed
+    private void jComboBox_BaudRateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_BaudRateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox_ComPortActionPerformed
+    }//GEN-LAST:event_jComboBox_BaudRateActionPerformed
+
+    private void jToggleButton_Fluke45ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton_Fluke45ActionPerformed
+        portAddress = getserialport();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        if (handler == null) {
+            handler = new Fluck45Handler();
+        }
+
+        if (receiver != null) {
+            receiver.endListen();
+        }
+        receiver = RS232Connector.getInstance(handler, portAddress);
+
+        receiver.addFilter("logger", new LoggingFilter());
+        receiver.addFilter("codec", new ProtocolCodecFilter(new Fluke45ProtocolCodecFactory()));    // 设置编码过滤器
+        if (chartPanel == null) {
+            FlukeDrawInit();
+        }
+        ((Fluck45Handler) handler).setTs(timeseriescollection.getSeries(0));
+        ((Fluck45Handler) handler).setIsdraw(jCheckBox_flukedraw.isSelected());
+        timeseriescollection.getSeries(0).setMaximumItemCount(36000);
+        // receiver.addFilter("codec", new ProtocolCodecFilter(
+        // new TextLineCodecFactory(Charset.forName("UTF-8")))); // 设置编码过滤器
+        if (jToggleButton_Fluke45.isSelected()) {
+            try {
+                receiver.startListen();
+            } catch (RuntimeIoException e) {
+                System.out.println("串口打开失败");
+            }
+
+            if (((Fluck45Handler) handler).outfile == null) {
+                File path = new File("c:\\logs\\");
+                path.mkdirs();
+                ((Fluck45Handler) handler).outfile = new File("c:\\logs\\Fluke45" + sdf.format(new Date()) + ".txt");
+            }
+            ((Fluck45Handler) handler).initfilelog();
+            jToggleButton_Fluke45.setText("关闭");
+        } else {
+            receiver.endListen();
+            if (jCheckBox_FlukeClearChart.isSelected()) {
+                timeseriescollection.getSeries(0).clear();
+            }
+//            ((industrialpcHandler) handler).outfile =null;
+            ((Fluck45Handler) handler).teminatefilelog();
+
+            jToggleButton_Fluke45.setText("开始");
+        }
+
+    }//GEN-LAST:event_jToggleButton_Fluke45ActionPerformed
+
+    private void jButton_flushlogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_flushlogActionPerformed
+        if (handler != null) {
+            ((Fluck45Handler) handler).flushfilelog();
+        }
+    }//GEN-LAST:event_jButton_flushlogActionPerformed
+
+    private void jButtonCommentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCommentActionPerformed
+        String commentToWrite = String.format("==================== %s ====================\r\n", jTextField_comment.getText());
+        if (handler != null) {
+            System.out.println(commentToWrite);
+            ((Fluck45Handler) handler).addTextToLog(commentToWrite);
+        }
+    }//GEN-LAST:event_jButtonCommentActionPerformed
+
+    private void jButton_pauseDarwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_pauseDarwActionPerformed
+        ((Fluck45Handler) handler).switchPausedraw();
+        boolean pause = ((Fluck45Handler) handler).isPausedraw();
+        if (pause) {
+            jButton_pauseDarw.setText("Continue");
+        } else {
+            jButton_pauseDarw.setText("Pause");
+
+        }
+
+//        ExtensionFileFilter filter = new ExtensionFileFilter("log,txt", true, true);
+//        filter.setDescription("命令文件");
+//
+//        JFileChooser jfc = new JFileChooser();
+//        FileSystemView fsv = FileSystemView.getFileSystemView();
+//        //得到桌面路径
+//        jfc.setCurrentDirectory(fsv.getHomeDirectory());
+//        jfc.setDialogTitle("选择文件位置");
+//        jfc.setMultiSelectionEnabled(false);
+//        jfc.setDialogType(JFileChooser.OPEN_DIALOG);
+//        jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+//        jfc.setFileFilter(filter);
+//        int result = jfc.showOpenDialog(this);  // 打开"打开文件"对话框
+//        String content;
+//        if (result == JFileChooser.APPROVE_OPTION) {
+//            String filepath = jfc.getSelectedFile().getAbsolutePath();
+//            content = FilePlus.ReadTextFileToString(new File(filepath), "\r\n", "utf-8");
+//        } else {
+//            content = null;
+//        }
+//        if (content != null) {
+//            String[] sa = content.split("\r\n");
+//
+//            FlukeDrawInit();
+//
+//            timeseriescollection.getSeries(0).setNotify(false);
+//            SimpleDateFormat sdfx = new SimpleDateFormat("[yyyy/MM/dd HH:mm:ss SSS]");
+//            for (int i = 0; i < sa.length; i++) {
+//                String s = sa[i];
+//                if (s.startsWith("[")) {
+////                    s = s.replaceAll("\\[", "");
+//
+////                    String[] sa2 = s.split("]");
+//                    try {
+//                        Date time = sdfx.parse(s);
+//                        int position = s.lastIndexOf('+');
+//                        position = position == -1 ? s.lastIndexOf(']') + 2 : position;
+//                        double d1 = Double.parseDouble(s.substring(position)) * 1000;
+//                        timeseriescollection.getSeries(0).addOrUpdate(new Millisecond(time), d1);
+//                    } catch (ParseException ex) {
+//                        System.out.println(s);
+//                        Logger.getLogger(UITester.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                }
+//            }
+//
+//            timeseriescollection.getSeries(0).setNotify(true);
+//        }
+
+    }//GEN-LAST:event_jButton_pauseDarwActionPerformed
+
+    public void FlukeDrawInit() {
+//            System.out.println(sa.length);
+        //绘图
+        //绘图
+        TimeSeries ts = new TimeSeries("O2 Sensor Voltage", Millisecond.class);
+        timeseriescollection = new TimeSeriesCollection(ts);
+        JFreeChart jfreechart = ChartFactory.createTimeSeriesChart("曲线", "Time(s)", "Value", timeseriescollection, true, true, false);
+        XYPlot xyplot = jfreechart.getXYPlot();
+        xyplot.setDomainCrosshairVisible(true);
+        xyplot.setRangeCrosshairVisible(true);
+        //纵坐标设定
+        ValueAxis valueaxis = xyplot.getDomainAxis();
+        //水平底部列表   
+        valueaxis.setLabelFont(new Font("黑体", Font.BOLD, 14));
+        //水平底部标题
+        valueaxis.setTickLabelFont(new Font("宋体", Font.BOLD, 12));
+        //自动设置数据轴数据范围
+        valueaxis.setAutoRange(true);
+        //数据轴固定数据范围 7days
+//                valueaxis.setFixedAutoRange(604800000D);
+        valueaxis = xyplot.getRangeAxis();
+        valueaxis.setLabelFont(new Font("黑体", Font.BOLD, 14));
+        XYLineAndShapeRenderer line0render = (XYLineAndShapeRenderer) xyplot.getRenderer(0);
+        line0render.setSeriesPaint(3, Color.ORANGE);
+        jfreechart.getTitle().setFont(new Font("黑体", Font.BOLD, 20));//设置标题字体
+        jfreechart.getLegend().setItemFont(new Font("宋体", Font.ITALIC, 15));
+//        if (chartPanel != null) {
+//            jPanel_FlukeShow.remove(chartPanel);
+//        }
+        chartPanel = new ChartPanel(jfreechart);
+        chartPanel.setSize(1000, 280);
+        chartPanel.setPreferredSize(new Dimension(1000, 302));
+        jPanel_FlukeShow.add(chartPanel, BorderLayout.CENTER);
+        xyplot.getRenderer(0).setSeriesToolTipGenerator(0, new StandardXYToolTipGenerator("{1}, {2}mV",
+                new SimpleDateFormat("MM-dd HH:mm:ss"),
+                new DecimalFormat("0.00")));
+    }
+
+    private void jCheckBox_autosaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_autosaveActionPerformed
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        if (jCheckBox_autosave.isSelected()) {
+            //            jFormattedTextField_autoclear.setEnabled(true);
+            //            jFormattedTextField_autoclear.setValue(20000);
+            gpstream.setLogFileFlag(true);
+            //            gpstream.setAutoclear(true);
+            //            gpstream.setAutoclearcount((Integer) jFormattedTextField_autoclear.getValue());
+        } else {
+            gpstream.setLogFileFlag(false);
+            //            jFormattedTextField_autoclear.setEnabled(false);
+            //            jFormattedTextField_autoclear.setText("");
+            //            gpstream.setAutoclear(false);
+            //            jFormattedTextField_autoclear.setValue(0);
+        }
+    }//GEN-LAST:event_jCheckBox_autosaveActionPerformed
+
+    private void jFormattedTextField_autoclearFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFormattedTextField_autoclearFocusLost
+        gpstream.setAutoclearcount((Integer) jFormattedTextField_autoclear.getValue());
+        System.out.println("设置自动清空上限为：" + (Integer) jFormattedTextField_autoclear.getValue());
+    }//GEN-LAST:event_jFormattedTextField_autoclearFocusLost
+
+    private void jCheckBox_autoclearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox_autoclearActionPerformed
+        // TODO add your handling code here:
+        if (jCheckBox_autoclear.isSelected()) {
+            jFormattedTextField_autoclear.setEnabled(true);
+            jFormattedTextField_autoclear.setValue(20000);
+            gpstream.setAutoclear(true);
+            gpstream.setAutoclearcount((Integer) jFormattedTextField_autoclear.getValue());
+        } else {
+            jFormattedTextField_autoclear.setEnabled(false);
+            jFormattedTextField_autoclear.setText("");
+            gpstream.setAutoclear(false);
+            //            jFormattedTextField_autoclear.setValue(0);
+        }
+    }//GEN-LAST:event_jCheckBox_autoclearActionPerformed
+
+    private void jButton_saveoutputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_saveoutputActionPerformed
+        //        JOptionPane.showConfirmDialog(jLabel_ComPort, "本功能暂未实现，留待下一版本想起来再说");
+        ExtensionFileFilter filter = new ExtensionFileFilter("log,txt", true, true);
+        filter.setDescription("日志文件 ");
+
+        JFileChooser jfc = new JFileChooser();
+        FileSystemView fsv = FileSystemView.getFileSystemView();
+        //得到桌面路径
+        jfc.setCurrentDirectory(fsv.getHomeDirectory());
+        jfc.setDialogTitle("选择保存位置");
+        jfc.setMultiSelectionEnabled(false);
+        jfc.setDialogType(JFileChooser.SAVE_DIALOG);
+        jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        jfc.setFileFilter(filter);
+        int result = jfc.showOpenDialog(this);  // 打开"打开文件"对话框
+        if (result == JFileChooser.APPROVE_OPTION) {
+            String file = jfc.getSelectedFile().getAbsolutePath();
+            int dotindex = file.indexOf(".");
+            if (dotindex < 0) {
+                file = file + ".log";
+            }
+            try {
+                FileWriter fw = new FileWriter(file, true);
+                //                FileWriter fw = new FileWriter(jfc.getSelectedFile(), true);
+                fw.append(jTextArea_output.getText());
+                fw.close();
+            } catch (IOException ex) {
+                Logger.getLogger(UITester.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //        int ibaudrate = Integer.parseInt((String)jComboBox_BaudRate.getSelectedItem());
+            //        int baudrate = (Integer)jComboBox_BaudRate.getSelectedItem();
+            //        System.out.println(baudrate);
+            //        System.out.println("aaa");
+        }
+
+        //        int ibaudrate = Integer.parseInt((String)jComboBox_BaudRate.getSelectedItem());
+        //        int baudrate = (Integer)jComboBox_BaudRate.getSelectedItem();
+        //        System.out.println(baudrate);
+        //        System.out.println("aaa");
+    }//GEN-LAST:event_jButton_saveoutputActionPerformed
+
+    private void jButton_emptyoutputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_emptyoutputActionPerformed
+        gpstream.clear();
+        System.setOut(gpstream);
+        //        System.out.flush();
+        //        System.out.close();
+        jTextArea_output.setText("");
+        //        System.setOut(new GUIPrintStream(System.out, ut.jTextArea_output));
+    }//GEN-LAST:event_jButton_emptyoutputActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Fluke45Chart rs = new Fluke45Chart();
+        rs.setVisible(true);
+        rs.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        rs.setLocationRelativeTo(getOwner());
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jToggleButton_sartoriusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton_sartoriusActionPerformed
+        portAddress = getserialport();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        if (handler == null) {
+            handler = new SartoriusHandler();
+        }
+
+        if (receiver != null) {
+            receiver.endListen();
+        }
+        receiver = RS232Connector.getInstance(handler, portAddress);
+
+//        receiver.addFilter("logger", new LoggingFilter());
+        receiver.addFilter("codec", new ProtocolCodecFilter(new Fluke45ProtocolCodecFactory()));    // 设置编码过滤器
+//        if (chartPanel == null) {
+//            FlukeDrawInit();
+//        }
+//        ((SartoriusHandler)handler).setTs(timeseriescollection.getSeries(0));
+
+        ((SartoriusHandler) handler).setDetailout(jCheckBox_detailout.isSelected());
+        ((SartoriusHandler) handler).init();
+//        ((SartoriusHandler)handler).setIsdraw(jCheckBox_flukedraw.isSelected());
+//        timeseriescollection.getSeries(0).setMaximumItemCount(36000);
+        // receiver.addFilter("codec", new ProtocolCodecFilter(
+        // new TextLineCodecFactory(Charset.forName("UTF-8")))); // 设置编码过滤器
+        if (jToggleButton_sartorius.isSelected()) {
+            try {
+                receiver.startListen();
+            } catch (RuntimeIoException e) {
+                System.out.println("串口打开失败");
+            }
+
+            if (((SartoriusHandler) handler).outfile == null) {
+                File path = new File("c:\\logs\\");
+                path.mkdirs();
+                ((SartoriusHandler) handler).outfile = new File("c:\\logs\\Fluke45" + sdf.format(new Date()) + ".txt");
+            }
+            ((SartoriusHandler) handler).initfilelog();
+            jToggleButton_sartorius.setText("关闭");
+        } else {
+            receiver.endListen();
+//            if(jCheckBox_FlukeClearChart.isSelected()){
+//                timeseriescollection.getSeries(0).clear();
+//            }
+//            ((industrialpcHandler) handler).outfile =null;
+            ((SartoriusHandler) handler).teminatefilelog();
+
+            jToggleButton_sartorius.setText("开始");
+        }
+    }//GEN-LAST:event_jToggleButton_sartoriusActionPerformed
 
     private void drawled(int[] flag) {
         Graphics g = jPanel_leds.getGraphics();
@@ -2555,11 +2906,9 @@ public class UITester extends javax.swing.JFrame {
         if (jTextArea_output.getLineCount() > 1000) {
             jTextArea_output.setText("");
 
-
         }
         jTextArea_output.append(s);
         jTextArea_output.append("\r\n");
-
 
     }
 
@@ -2581,19 +2930,48 @@ public class UITester extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 UITester ut = new UITester();
-                ut.setVisible(true);
+
+                Date today = new Date();
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                Date afterdate;
+                try {
+                    afterdate = format.parse("2015-08-02"); // Try catch省略了
+                    if (today.after(afterdate)) {
+                        ut.dispose();
+                    } else {
+                        ut.setVisible(true);
+                    }
+                } catch (ParseException ex) {
+                    Logger.getLogger(UITester.class.getName()).log(Level.SEVERE, null, ex);
+                }
+//                ut.setVisible(true);
+
                 ut.gpstream = new GUIPrintStream(System.out, ut.jTextArea_output, true);
                 System.setOut(ut.gpstream);
-                
+
                 Component cs[] = ut.jTabbedPane_All.getComponents();
 //                ut.jTabbedPane_All.remove(10);
 
 //只查看一个页面时使用该段代码
+//                if (true) {
                 if (false) {
                     for (int i = 0; i < cs.length; i++) {
                         Component c = cs[i];
                         String name = c.getName();
-                        if (name == null || !name.equals("showcoder")) {
+                        if (name == null || !name.equals("showsartorius")) {
+//                        if (name == null || !name.equals("showcoder")) {
+                            ut.jTabbedPane_All.remove(c);
+                        }
+                    }
+                }
+
+//                if (true) {
+                if (false) {
+                    for (int i = 0; i < cs.length; i++) {
+                        Component c = cs[i];
+                        String name = c.getName();
+                        if (name == null || !name.equals("showfluke45")) {
+//                        if (name == null || !name.equals("showcoder")) {
                             ut.jTabbedPane_All.remove(c);
                         }
                     }
@@ -2617,16 +2995,12 @@ public class UITester extends javax.swing.JFrame {
                         }
                     }
                 }
-                
 
 //                ut.repaint();
 //
 //                System.out.println(ut.jTabbedPane_All.getComponents().length);
-
-
             }
         });
-
 
     }
 
@@ -2649,9 +3023,7 @@ public class UITester extends javax.swing.JFrame {
         outrow(
                 "------------------------与重量一差值------------------------------");
 
-
         double[] diffValueArray = new double[valueArray.length - 1];
-
 
         for (int i = 0; i
                 < diffValueArray.length; i++) {
@@ -2660,35 +3032,28 @@ public class UITester extends javax.swing.JFrame {
             outrow(
                     "Δg" + (i + 1) + ":" + decformat.format(diffValueArray[i]).toString());
 
-
         }
         decformat = new DecimalFormat("0.0000%");
         outrow(
                 "---------------------------比例系数------------------------------");
 
-
         for (int i = 2; i
                 < diffValueArray.length; i++) {
             double value = 0;
 
-
             if (diffValueArray[i - 2] - diffValueArray[i - 1] != 0) {
                 value = (diffValueArray[i - 2] + diffValueArray[i] - 2 * diffValueArray[i - 1]) / (diffValueArray[i - 2] - diffValueArray[i - 1]);
-
 
             } else {
                 value = 0;
                 outrow(
                         "比例系数差值0，请增大时间");
 
-
             } //System.out.println("∮"+(i-1)+":"+decformat.format(value).toString());
             outrow("∮" + (i - 1) + ":" + decformat.format(value).toString());
 
-
         }
         outrow("================================================================");
-
 
     }
 
@@ -2701,42 +3066,32 @@ public class UITester extends javax.swing.JFrame {
         if (valueArray.length < 5) {
             outrow("输入数据不正确，请查正");
 
-
             return;
-
 
         }
         double area = valueArray[0];
 
-
         double factor = valueArray[1];
 
-
         double time = valueArray[2];
-
 
         if (area == 0) {
             outrow("面积输入错误");
 
-
         }
         if (time == 0) {
             outrow("时间输入错误");
-
 
         }
         DecimalFormat decformat = new DecimalFormat("0.0000");
         outrow(
                 "---------------------------数据差值------------------------------");
 
-
         double[] diffValueArray = new double[valueArray.length - 4];
-
 
         for (int i = 4; i
                 < valueArray.length; i++) {
             diffValueArray[i - 4] = valueArray[i] - valueArray[i - 1];
-
 
         }
         for (int i = 0; i
@@ -2745,10 +3100,8 @@ public class UITester extends javax.swing.JFrame {
             outrow(
                     "Δg" + (i + 1) + ":" + decformat.format(d).toString());
 
-
         }
         outrow("---------------------------WVTR---------------------------------");
-
 
         for (int i = 0; i
                 < diffValueArray.length; i++) {
@@ -2757,15 +3110,15 @@ public class UITester extends javax.swing.JFrame {
             outrow(
                     "wvtr" + (i + 1) + ":" + decformat.format(value).toString());
 
-
         }
         outrow("================================================================");
-
 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup_lockstatus;
     private javax.swing.ButtonGroup buttonGroup_testtype;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonComment;
     private javax.swing.JButton jButton_ACLPacketCount;
     private javax.swing.JButton jButton_CRCcompute;
     private javax.swing.JButton jButton_CoderReset;
@@ -2776,14 +3129,19 @@ public class UITester extends javax.swing.JFrame {
     private javax.swing.JButton jButton_chyca_send;
     private javax.swing.JButton jButton_clearcount;
     private javax.swing.JButton jButton_emptyoutput;
+    private javax.swing.JButton jButton_flushlog;
     private javax.swing.JButton jButton_httl1;
     private javax.swing.JButton jButton_lockset;
     private javax.swing.JButton jButton_opencommandfile;
+    private javax.swing.JButton jButton_pauseDarw;
     private javax.swing.JButton jButton_saveoutput;
     private javax.swing.JButton jButton_tools;
+    private javax.swing.JCheckBox jCheckBox_FlukeClearChart;
     private javax.swing.JCheckBox jCheckBox_autoclear;
     private javax.swing.JCheckBox jCheckBox_autosave;
     private javax.swing.JCheckBox jCheckBox_detailPacket;
+    private javax.swing.JCheckBox jCheckBox_detailout;
+    private javax.swing.JCheckBox jCheckBox_flukedraw;
     private javax.swing.JCheckBox jCheckBox_opencommandfile_utf8;
     private javax.swing.JCheckBox jCheckBox_printreadble;
     private javax.swing.JComboBox jComboBox_BaudRate;
@@ -2832,7 +3190,10 @@ public class UITester extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_030;
     private javax.swing.JPanel jPanel_ACLPacketRead;
     private javax.swing.JPanel jPanel_Coder;
+    private javax.swing.JPanel jPanel_Fluke45;
+    private javax.swing.JPanel jPanel_FlukeShow;
     private javax.swing.JPanel jPanel_Mxd02;
+    private javax.swing.JPanel jPanel_Sartorius;
     private javax.swing.JPanel jPanel_SendTxt;
     private javax.swing.JPanel jPanel_VACVBS;
     private javax.swing.JPanel jPanel_about;
@@ -2866,11 +3227,13 @@ public class UITester extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea_command;
     private javax.swing.JTextArea jTextArea_datas;
     private javax.swing.JTextArea jTextArea_output;
+    private javax.swing.JTextField jTextField_comment;
     private javax.swing.JTextField jTextField_crc1;
     private javax.swing.JTextField jTextField_crc2;
     private javax.swing.JTextField jTextField_valvesValue;
     private javax.swing.JToggleButton jToggleButton_ACLPacketRead;
     private javax.swing.JToggleButton jToggleButton_Coder;
+    private javax.swing.JToggleButton jToggleButton_Fluke45;
     private javax.swing.JToggleButton jToggleButton_VACVBS;
     private javax.swing.JToggleButton jToggleButton_chyca;
     private javax.swing.JToggleButton jToggleButton_commandSender;
@@ -2879,6 +3242,7 @@ public class UITester extends javax.swing.JFrame {
     private javax.swing.JToggleButton jToggleButton_lltest;
     private javax.swing.JToggleButton jToggleButton_lltest2;
     private javax.swing.JToggleButton jToggleButton_mxd02;
+    private javax.swing.JToggleButton jToggleButton_sartorius;
     private javax.swing.JToggleButton jToggleButton_w3030;
     // End of variables declaration//GEN-END:variables
 }

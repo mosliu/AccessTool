@@ -704,7 +704,7 @@ public class DeviceResultCompute extends javax.swing.JFrame {
             }
         });
 
-        jFormattedTextField_VAC_P1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.000"))));
+        jFormattedTextField_VAC_P1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00000"))));
         jFormattedTextField_VAC_P1.setText("1");
         jFormattedTextField_VAC_P1.setToolTipText("高压腔压力");
         jFormattedTextField_VAC_P1.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -716,7 +716,7 @@ public class DeviceResultCompute extends javax.swing.JFrame {
         jLabel_VAC_P1.setText("P1(0.1MPa)：");
         jLabel_VAC_P1.setToolTipText("高压腔压力");
 
-        jFormattedTextField_VAC_P2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.000"))));
+        jFormattedTextField_VAC_P2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00000"))));
         jFormattedTextField_VAC_P2.setText("0");
         jFormattedTextField_VAC_P2.setToolTipText("低压腔压力");
         jFormattedTextField_VAC_P2.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -1635,7 +1635,7 @@ public class DeviceResultCompute extends javax.swing.JFrame {
 
     private void jRadioButton_vac_7210ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton_vac_7210ActionPerformed
         
-        jFormattedTextField_VAC_V.setValue(33.033d);
+        jFormattedTextField_VAC_V.setValue(11.166d);
         jFormattedTextField_VAC_S.setValue(0.003848d);
         jFormattedTextField_VAC_T.setValue(25d);
         jFormattedTextField_VAC_T0.setValue(273.15d);
@@ -1681,9 +1681,9 @@ public class DeviceResultCompute extends javax.swing.JFrame {
         jFormattedTextField_VAC_S.setValue(0.002827d);
         jFormattedTextField_VAC_T.setValue(25d);
         jFormattedTextField_VAC_T0.setValue(273d);
-        jFormattedTextField_VAC_P0.setValue(101300d);
-        jFormattedTextField_VAC_P1.setValue(1d);
-        jFormattedTextField_VAC_P2.setValue(0d);
+        jFormattedTextField_VAC_P0.setValue(101325d);
+        jFormattedTextField_VAC_P1.setValue(1.01000d);
+        jFormattedTextField_VAC_P2.setValue(0.00000d);
         jFormattedTextField_VAC_deltaT.setValue(3600d);
         jFormattedTextField_VAC_deltaPstart.setValue(9d);
         jFormattedTextField_VAC_deltaPend.setValue(150d);

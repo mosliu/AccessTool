@@ -141,7 +141,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="jTabbedPane_All" min="-2" pref="233" max="-2" attributes="0"/>
+              <Component id="jTabbedPane_All" pref="233" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="jPanel_functions" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -153,6 +153,9 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JTabbedPane" name="jTabbedPane_All">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="showsartorius" noResource="true"/>
+      </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
       </AccessibilityProperties>
@@ -987,7 +990,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/res/icon/config.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt; &#x672c;&#x529f;&#x80fd;&#x7528;&#x4e8e;&#x6a21;&#x62df;&#x5de5;&#x63a7;&#x673a;&lt;br/&gt; &#x5904;&#x7406;&#x4ece;&#x8bbe;&#x5907;&#x4f20;&#x9001;&#x8fc7;&#x6765;&#x7684;&#x6570;&#x636e;&lt;br/&gt; &#x89e3;&#x6790;&#x6210;&#x4eba;&#x53ef;&#x8bfb;&#x6570;&#x636e;&lt;br/&gt; &#x65b0;&#x589e;&#x8bbe;&#x5907;&#x6570;&#x636e;&#x8ba1;&#x7b97;&#x5de5;&#x5177;&#x96c6; &lt;br/&gt; V2.0.19&lt;/html&gt;"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt; &#x672c;&#x529f;&#x80fd;&#x7528;&#x4e8e;&#x6a21;&#x62df;&#x5de5;&#x63a7;&#x673a;&lt;br/&gt; &#x5904;&#x7406;&#x4ece;&#x8bbe;&#x5907;&#x4f20;&#x9001;&#x8fc7;&#x6765;&#x7684;&#x6570;&#x636e;&lt;br/&gt; &#x89e3;&#x6790;&#x6210;&#x4eba;&#x53ef;&#x8bfb;&#x6570;&#x636e;&lt;br/&gt; &#x65b0;&#x589e;&#x8bbe;&#x5907;&#x6570;&#x636e;&#x8ba1;&#x7b97;&#x5de5;&#x5177;&#x96c6; &lt;br/&gt; V2.0.20&lt;/html&gt;"/>
                 <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
@@ -1597,6 +1600,212 @@
             </Component>
           </SubComponents>
         </Container>
+        <Container class="javax.swing.JPanel" name="jPanel_Fluke45">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="showfluke45" noResource="true"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Fluke45">
+                <Property name="tabTitle" type="java.lang.String" value="Fluke45"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jToggleButton_Fluke45" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jButton_flushlog" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jButton_pauseDarw" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jButtonComment" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jTextField_comment" min="-2" pref="272" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jButton2" min="-2" pref="29" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="25" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="jPanel_FlukeShow" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jPanel_FlukeShow" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jToggleButton_Fluke45" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButton_flushlog" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonComment" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButton_pauseDarw" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextField_comment" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JToggleButton" name="jToggleButton_Fluke45">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x5f00;&#x59cb;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton_Fluke45ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButton_flushlog">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="savelog"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_flushlogActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextField_comment">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="comment"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonComment">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Add comment"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCommentActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButton_pauseDarw">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Pause"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_pauseDarwActionPerformed"/>
+              </Events>
+            </Component>
+            <Container class="javax.swing.JPanel" name="jPanel_FlukeShow">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                    <EtchetBorder/>
+                  </Border>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jCheckBox_flukedraw" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCheckBox_FlukeClearChart" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jCheckBox_flukedraw" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jCheckBox_FlukeClearChart" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="90" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JCheckBox" name="jCheckBox_flukedraw">
+                  <Properties>
+                    <Property name="selected" type="boolean" value="true"/>
+                    <Property name="text" type="java.lang.String" value="Draw "/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="jCheckBox_FlukeClearChart">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Clear"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JButton" name="jButton2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jButton2"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+              </Events>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel_Sartorius">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="showsartorius" noResource="true"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Sartorius">
+                <Property name="tabTitle" type="java.lang.String" value="Sartorius"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jCheckBox_detailout" min="-2" max="-2" attributes="0"/>
+                          <Component id="jToggleButton_sartorius" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="581" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="113" max="32767" attributes="0"/>
+                      <Component id="jCheckBox_detailout" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jToggleButton_sartorius" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JToggleButton" name="jToggleButton_sartorius">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x5f00;&#x59cb;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton_sartoriusActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="jCheckBox_detailout">
+              <Properties>
+                <Property name="selected" type="boolean" value="true"/>
+                <Property name="text" type="java.lang.String" value="Detailout"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="jPanel_functions">
@@ -1711,9 +1920,6 @@
                   </StringArray>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox_ComPortActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel_BaudRate">
               <Properties>
@@ -1742,6 +1948,9 @@
                 </Property>
                 <Property name="selectedIndex" type="int" value="13"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox_BaudRateActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
