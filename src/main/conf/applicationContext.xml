@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+          http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+">
+    <!--CONFIG--> 
+    <bean id="bean" class="org.springframework.aop.framework.ProxyFactoryBean"> 
+        <property name="proxyInterfaces"> 
+            <value>net.liuxuan.springtest.Bean</value> 
+        </property> 
+        <property name="target"> 
+            <ref bean="beanTarget"/> 
+        </property> 
+        <property name="interceptorNames"> 
+            <list> 
+                <value>theAdvisor</value> 
+            </list> 
+        </property> 
+    </bean>
+    <!--CLASS--> 
+    <bean id="beanTarget" class="net.liuxuan.springtest.BeanImpl"/>
+    
+    
+    
+    <!--ADVISOR--> 
+    <!--Note: An advisor assembles pointcut and advice--> 
+    <bean id="theAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor"> 
+        <property name="advice"> 
+            <ref  bean="theBeforeAdvice"/> 
+        </property> 
+        <property name="pattern"> 
+            <!--
+              <value>com\.company\.springaop\.test\.Bean\.theMethod</value>
+            -->
+            <value>net\.liuxuan\.springtest\.Bean\.log</value> 
+        </property> 
+    </bean>
+    <!--ADVICE--> 
+    <bean id="theBeforeAdvice" class="net.liuxuan.springtest.TestBeforeAdvice"/> 
+    
+    <context:component-scan base-package="net.liuxuan.springtest" />
+    
+    <!--context:load-time-weaver/-->
+    <context:spring-configured />
+        
+    
+    
+    
+</beans>
